@@ -60,7 +60,7 @@ def load_data(eval_file_path):
 
 def run():
     logger.log("Start running file %s" % file_name)
-    file_path = os.path.join(directory, 'data/test_data/' + file_name)
+    file_path = os.path.join(directory, 'data/test_data_for_evaluation/' + file_name)
     eval_file_path = os.path.join(file_path, file_name + '_eval_%d' % rank)
 
     logger.log("Loading data, please wait.")
