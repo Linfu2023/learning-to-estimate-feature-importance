@@ -115,7 +115,7 @@ if __name__ == "__main__":
     parser.add_argument("-d", "--directory", help="directory of FeatureLTE", type=str, default="FeatureLTE")
     parser.add_argument("-f", "--file_name", help="file name of test data", type=str, default="[UCI]Arrhythmia")
     parser.add_argument("-e", "--eval_type", help="evaluation type", type=str, default="lte")
-    parser.add_argument("-n", "--n_jobs", help="evaluation type", type=str, default="lte")
+    parser.add_argument("-n", "--n_jobs", help="evaluation type", type=int, default="-1")
     args = parser.parse_args()
     file_name = args.file_name
     directory = args.directory
