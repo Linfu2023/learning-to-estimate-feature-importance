@@ -78,7 +78,7 @@ def get_LTE_result(meta_features, model_path):
 
 def run():
     logger.log("Start running file %s" % file_name)
-    file_path = os.path.join(directory, 'data/test_data/' + file_name)
+    file_path = os.path.join(directory, 'data/test_data_for_evaluation/' + file_name)
     model_path = os.path.join(directory, 'models/' + model_type)
     eval_file_path = os.path.join(file_path, file_name + '_eval_%d' % rank)
     meta_features = get_meta_features(eval_file_path, model_path)
