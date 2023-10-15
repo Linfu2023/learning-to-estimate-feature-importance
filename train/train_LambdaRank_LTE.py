@@ -122,7 +122,7 @@ def preprocess_data(data):
     return data, label
 
 
-def train_and_predict(data_train, data_val, label_version, seed, isprint=True):
+def train_and_predict(data_train, data_val):
     try:
         logger.log("Finish ensembling data.")
         categorical_features = list(data_train.select_dtypes(exclude=np.number).columns)[1:]
@@ -145,13 +145,13 @@ def train_and_predict(data_train, data_val, label_version, seed, isprint=True):
         X1_trans_val, X2_trans_val, Y_val, W_val = get_data(data_val, label_val)
         d_train = {'X1': X1_trans, 'X2': X2_trans, 'Y': Y, 'W': W}
         d_val = {'X1': X1_trans_val, 'X2': X2_trans_val, 'Y': Y_val, 'W': W_val}
-        with open(os.path.join('../meta_features/', f"d_train_{label_version}.pkl"), "wb") as f:
+        with open(os.path.join(directory, f"data/train_data/d_train_{label_version}.pkl"), "wb") as f:
             pickle.dump(d_train, f)
-        with open(os.path.join('../meta_features/', f"d_val_{label_version}.pkl"), "wb") as f:
+        with open(os.path.join(directory, f"data/valid_data/d_val_{label_version}.pkl"), "wb") as f:
             pickle.dump(d_val, f)
 
-        d_train = pickle.load(open(os.path.join('../meta_features/', f"d_train_{label_version}.pkl"), 'rb'))
-        d_val = pickle.load(open(os.path.join('../meta_features/', f"d_val_{label_version}.pkl"), 'rb'))
+        d_train = pickle.load(open(os.path.join(directory, f"data/train_data/d_train_{label_version}.pkl"), 'rb'))
+        d_val = pickle.load(open(os.path.join(directory, f"data/valid_data/d_val_{label_version}.pkl"), 'rb'))
         X1_trans, X2_trans, Y, W = d_train['X1'], d_train['X2'], d_train['Y'], d_train['W']
         X1_trans_val, X2_trans_val, Y_val, W_val = d_val['X1'], d_val['X2'], d_val['Y'], d_val['W']
 
@@ -177,26 +177,30 @@ def train_and_predict(data_train, data_val, label_version, seed, isprint=True):
                    validation_data=([X1_trans_val, X2_trans_val], Y_val, W_val),
                    val_data_for_ndcg=[data_val, label_val])
         logger.log("finish fitting.")
-        ranker.save('models_copy/LTE_s%d_v%d' % (seed, label_version))
+        model_save_dir = os.path.join(directory, output_dir)
+        if not os.path.exists(model_save_dir):
+            os.mkdir(model_save_dir)
+        ranker.save(os.path.join(model_save_dir, 'LTE_s%d_v%d' % (seed, label_version)))
 
     except Exception:
         import traceback
         logger.log(traceback.format_exc())
 
 
-def run(label_version, seed):
+def run():
     try:
         # All the random seeds remain consistent.
         np.random.seed(seed)
         random.seed(seed)
         tf.random.set_seed(seed)
-        data_train = pd.read_csv('../meta_features/meta_features_LTE_train/meta_features_LTE_train_v%d.csv' % label_version)
-        data_val = pd.read_csv('../meta_features/meta_features_LTE_valid/meta_features_LTE_valid_v%d.csv' % label_version)
+
+        data_train = pd.read_csv(os.path.join(directory, 'data/train_data/meta_features_LTE_train_v%d.csv' % label_version))
+        data_val = pd.read_csv(os.path.join(directory, 'data/valid_data/meta_features_LTE_valid_v%d.csv' % label_version))
 
         data_train = data_train.drop(['feature'], axis=1).fillna(0)
         data_val = data_val.drop(['feature'], axis=1).fillna(0)
 
-        train_and_predict(data_train, data_val, label_version, seed)
+        train_and_predict(data_train, data_val)
     except Exception:
         import traceback
         logger.log(traceback.format_exc())
@@ -204,26 +208,25 @@ def run(label_version, seed):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    # parser.add_argument("-s", "--seed", help="Training version (different seeds).", type=int, default=5)
-
+    parser.add_argument("-d", "--directory", help="directory of FeatureLTE", type=str, default="FeatureLTE")
+    parser.add_argument("-d", "--type", help="model type of FeatureLTE", type=str, default="classification")
+    parser.add_argument("-o", "--output_dir", help="output directory of models", type=str, default="models/temp_clf_LTE_models")
     args = parser.parse_args()
-    # seed = args.seed
-    import time
+    directory = args.directory
+    output_dir = args.output_dir
 
-    t1 = time.time()
     from concurrent.futures import ProcessPoolExecutor
 
     logger = Logger('train_LambdaRank_LTE')
 
-    ex = ProcessPoolExecutor(8)
+    ex = ProcessPoolExecutor(5)
     try:
         for label_version in [1, 2, 3, 4, 5]:
             for seed in [1, 2, 3, 4, 5]:
                 logger.log([label_version, seed])
-                ex.submit(run, label_version, seed)
+                ex.submit(run)
         ex.shutdown(wait=True)
-        t2 = time.time()
-        print('Total time: ', t2 - t1)
+
     except Exception:
         import traceback
 

@@ -1,0 +1,1 @@
+python predict.py --directory ../ --file_name [UCI]Arrhythmia --model_type clf_LTE_models
