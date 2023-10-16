@@ -122,14 +122,16 @@ def preprocess_data(data):
     return data, label
 
 
-def train_and_predict(data_train, data_val):
+def train_and_predict(data_train, data_val, label_version, seed):
     try:
         logger.log("Finish ensembling data.")
         categorical_features = list(data_train.select_dtypes(exclude=np.number).columns)[1:]
         if 'filename' in categorical_features:
             raise NotImplementedError
 
+        logger.log("Shape of input training meta data:")
         logger.log(data_train.shape)
+        logger.log("Shape of input validation meta data:")
         logger.log(data_val.shape)
 
         features = ['f0', 'f1', 'f2', 'f3', 'f4', 'f5', 'f6', 'f7', 'f8', 'f9', 'f10']
@@ -180,7 +182,7 @@ def train_and_predict(data_train, data_val):
         logger.log(traceback.format_exc())
 
 
-def run():
+def run(label_version, seed):
     try:
         # All the random seeds remain consistent.
         np.random.seed(seed)
@@ -193,7 +195,7 @@ def run():
         data_train = data_train.drop(['feature'], axis=1).fillna(0)
         data_val = data_val.drop(['feature'], axis=1).fillna(0)
 
-        train_and_predict(data_train, data_val)
+        train_and_predict(data_train, data_val, label_version, seed)
     except Exception:
         import traceback
         logger.log(traceback.format_exc())
@@ -216,7 +218,7 @@ if __name__ == '__main__':
         for label_version in [1, 2, 3, 4, 5]:
             for seed in [1, 2, 3, 4, 5]:
                 logger.log([label_version, seed])
-                ex.submit(run)
+                ex.submit(run, label_version, seed)
         ex.shutdown(wait=True)
 
     except Exception:

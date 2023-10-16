@@ -1,10 +1,13 @@
 import argparse
 import os
-import copy
-import json
-from train.LambdaRank import LambdaRankNN
 import pandas as pd
 import numpy as np
+import copy
+import json
+import sys
+
+sys.path.append("..")
+from train.LambdaRank import LambdaRankNN
 from train.logger import Logger
 
 
@@ -76,13 +79,15 @@ def get_LTE_result(meta_features, model_path):
     return df
 
 
-def run():
+def run(rank):
     logger.log("Start running file %s" % file_name)
     file_path = os.path.join(directory, 'data/test_data_for_evaluation/' + file_name)
     model_path = os.path.join(directory, 'models/' + model_type)
     eval_file_path = os.path.join(file_path, file_name + '_eval_%d' % rank)
     meta_features = get_meta_features(eval_file_path, model_path)
+    logger.log("Successfully load the meta features of file %s in trial %d" % (file_name, rank))
     lte_result = get_LTE_result(meta_features, model_path)
+    logger.log("Successfully get the LTE result of file %s in trial %d" % (file_name, rank))
     lte_result.to_csv(os.path.join(eval_file_path, "lte_result.csv"), index=False)
 
 
@@ -105,7 +110,7 @@ if __name__ == '__main__':
     try:
         for rank in range(5):
             logger.log("rank: %d" % rank)
-            ex.submit(run)
+            ex.submit(run, rank)
         ex.shutdown(wait=True)
     except Exception:
         import traceback
