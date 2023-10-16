@@ -88,7 +88,7 @@ def run(rank):
     logger.log("Successfully load the meta features of file %s in trial %d" % (file_name, rank))
     lte_result = get_LTE_result(meta_features, model_path)
     logger.log("Successfully get the LTE result of file %s in trial %d" % (file_name, rank))
-    lte_result.to_csv(os.path.join(eval_file_path, "lte_result.csv"), index=False)
+    lte_result.to_csv(os.path.join(eval_file_path, "lte_FI_result.csv"), index=False)
 
 
 if __name__ == '__main__':

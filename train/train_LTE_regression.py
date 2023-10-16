@@ -8,7 +8,6 @@ from transform_pairwise import transform_pairwise
 from keras import initializers
 import keras
 import random
-import pickle
 import os
 import copy
 import argparse
@@ -70,8 +69,7 @@ def get_data(data_train, label_train):
     qid = get_qid(data_train)
 
     file_list = list(data_train['filename'].unique())
-    del data_train['filename']
-    x1, x2, y, weight = transform_pairwise(file_list, data_train.values.astype(float),
+    x1, x2, y, weight = transform_pairwise(file_list, data_train.drop(['filename'], axis=1).values.astype(float),
                                            label_train.values.ravel(), qid)
 
     X1_trans = []
@@ -145,17 +143,6 @@ def train_and_predict(data_train, data_val, label_version, seed):
 
         X1_trans, X2_trans, Y, W = get_data(data_train, label_train)
         X1_trans_val, X2_trans_val, Y_val, W_val = get_data(data_val, label_val)
-        d_train = {'X1': X1_trans, 'X2': X2_trans, 'Y': Y, 'W': W}
-        d_val = {'X1': X1_trans_val, 'X2': X2_trans_val, 'Y': Y_val, 'W': W_val}
-        with open(os.path.join(directory, f"data/train_data/d_train_{label_version}_reg.pkl"), "wb") as f:
-            pickle.dump(d_train, f)
-        with open(os.path.join(directory, f"data/valid_data/d_val_{label_version}_reg.pkl"), "wb") as f:
-            pickle.dump(d_val, f)
-
-        d_train = pickle.load(open(os.path.join(directory, f"data/train_data/d_train_{label_version}_reg.pkl"), 'rb'))
-        d_val = pickle.load(open(os.path.join(directory, f"data/valid_data/d_val_{label_version}_reg.pkl"), 'rb'))
-        X1_trans, X2_trans, Y, W = d_train['X1'], d_train['X2'], d_train['Y'], d_train['W']
-        X1_trans_val, X2_trans_val, Y_val, W_val = d_val['X1'], d_val['X2'], d_val['Y'], d_val['W']
 
         logger.log(X1_trans.shape)
         logger.log(X1_trans_val.shape)

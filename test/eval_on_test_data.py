@@ -58,7 +58,7 @@ def load_data(eval_file_path):
         os.remove(output_file)
 
 
-def run():
+def run(rank):
     logger.log("Start running file %s" % file_name)
     file_path = os.path.join(directory, 'data/test_data_for_evaluation/' + file_name)
     eval_file_path = os.path.join(file_path, file_name + '_eval_%d' % rank)
@@ -81,31 +81,32 @@ def run():
     if eval_type == "lte":
         local_fi_path = os.path.join(eval_file_path, "lte_result.csv")
         assert os.path.exists(local_fi_path)
-
-        lte_result = pd.read_csv(local_fi_path, index=False)
+        lte_result = pd.read_csv(local_fi_path)
         for seed in range(1, 6):
             logger.log("Start running file %s in seed %d" % (file_name, seed))
-            fi = dict(zip(lte_result['feature_name'], lte_result['v%d' % seed]))
+            fi = dict(zip(lte_result['feature_name'], lte_result['V%d' % seed]))
             seed_result = evaluation(train_x, train_y, valid_x, valid_y, test_x, test_y, fi, n_jobs)
             eval_result["seed%d" % seed] = seed_result
     else:
-        if eval_type == "mdi-default":
+        if eval_type == "mdi_default":
             fi = get_mdi_default_result(train_x, train_y, valid_x, valid_y)
-        elif eval_type == "mdi-tuned":
+        elif eval_type == "mdi_tuned":
             fi = get_mdi_tuned_result(train_x, train_y, valid_x, valid_y)
-        elif eval_type == "shap-default":
+        elif eval_type == "shap_default":
             fi = get_shap_default_result(train_x, train_y, valid_x, valid_y)
-        elif eval_type == "shap-tuned":
+        elif eval_type == "shap_tuned":
             fi = get_shap_tuned_result(train_x, train_y, valid_x, valid_y)
-        elif eval_type == "pi-single":
+        elif eval_type == "pi_single":
             fi = get_pi_single_result(train_x, train_y, valid_x, valid_y)
-        elif eval_type == "=pi-ensemble":
+        elif eval_type == "=pi_ensemble":
             fi = get_pi_ensemble_result(train_x, train_y, valid_x, valid_y)
         else:
             raise ValueError("Invalid eval type: %s!" % eval_type)
-        with open(os.path.join(eval_file_path, "%s_result.json" % eval_type), 'w') as f:
-            json.dump(fi, f)
+        with open(os.path.join(eval_file_path, "%s_FI_result.json" % eval_type), 'w') as f0:
+            json.dump(fi, f0)
         eval_result = evaluation(train_x, train_y, valid_x, valid_y, test_x, test_y, fi, n_jobs)
+    with open(os.path.join(eval_file_path, "%s_eval_result.json" % eval_type), 'w') as f1:
+        json.dump(eval_result, f1)
     return eval_result
 
 
@@ -127,7 +128,7 @@ if __name__ == "__main__":
     try:
         for rank in range(5):
             logger.log("rank: %d" % rank)
-            ex.submit(run)
+            ex.submit(run, rank)
         ex.shutdown(wait=True)
     except Exception:
         import traceback
