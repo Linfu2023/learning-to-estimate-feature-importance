@@ -3,11 +3,11 @@ import gzip
 import os
 import json
 from sklearn.metrics import roc_auc_score
+from eval_util import *
 import sys
 
 sys.path.append("..")
 from train.logger import Logger
-from eval_util import *
 
 
 def process_cat_fea(data, categorical_features):
