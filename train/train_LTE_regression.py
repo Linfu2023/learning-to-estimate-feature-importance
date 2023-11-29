@@ -132,7 +132,7 @@ def train_and_predict(data_train, data_val, label_version, seed):
         logger.log("Shape of input validation meta data:")
         logger.log(data_val.shape)
 
-        features = ['f0', 'f1', 'f2', 'f3', 'f4', 'f5', 'f6', 'f7', 'f8']
+        features = ['f_0', 'f_1', 'f_2', 'f_3', 'f_4', 'f_5', 'f_6', 'f_7', 'f_8']
         for i, feature in enumerate(features):
             SS = StandardScaler().fit(data_train[feature].values.reshape(-1, 1))
             data_train[feature] = SS.transform(data_train[feature].values.reshape(-1, 1))
@@ -157,12 +157,13 @@ def train_and_predict(data_train, data_val, label_version, seed):
         ranker.fit(X1_trans, X2_trans, Y, W, epochs=1000,
                    batch_size=1024, patience=10,
                    validation_data=([X1_trans_val, X2_trans_val], Y_val, W_val),
-                   val_data_for_ndcg=[data_val, label_val])
+                   val_data_for_ndcg=[data_val, label_val],
+                   features=features)
         logger.log("finish fitting.")
         model_save_dir = os.path.join(directory, output_dir)
         if not os.path.exists(model_save_dir):
             os.mkdir(model_save_dir)
-        ranker.save(os.path.join(model_save_dir, 'LTE_%d_%d' % (seed, label_version)))
+        ranker.save(os.path.join(model_save_dir, 'LTE_s%d_v%d' % (seed, label_version)))
 
     except Exception:
         import traceback
@@ -179,8 +180,8 @@ def run(label_version, seed):
         data_train = pd.read_csv(os.path.join(directory, 'data/train_data/meta_features_LTE_train_v%d_reg.csv' % label_version))
         data_val = pd.read_csv(os.path.join(directory, 'data/valid_data/meta_features_LTE_valid_v%d_reg.csv' % label_version))
 
-        data_train = data_train.drop(['feature'], axis=1).fillna(0)
-        data_val = data_val.drop(['feature'], axis=1).fillna(0)
+        data_train = data_train.fillna(0)
+        data_val = data_val.fillna(0)
 
         train_and_predict(data_train, data_val, label_version, seed)
     except Exception:
@@ -201,12 +202,22 @@ if __name__ == '__main__':
     logger = Logger('train_LambdaRank_LTE')
 
     ex = ProcessPoolExecutor(5)
+    futures = []
     try:
         for label_version in [1, 2, 3, 4, 5]:
             for seed in [1, 2, 3, 4, 5]:
                 logger.log([label_version, seed])
-                ex.submit(run, label_version, seed)
+                future = ex.submit(run, label_version, seed)
+                futures.append(future)
         ex.shutdown(wait=True)
+        for future in futures:
+            try:
+                result = future.result()
+            except Exception as e:
+                logger.log(e)
+                import traceback
+
+                traceback.print_exc()
 
     except Exception:
         import traceback

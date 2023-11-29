@@ -128,7 +128,7 @@ class RankerNN(object):
 
     def fit(self, X1_trans, X2_trans, y_trans, weight, batch_size=None, epochs=1, verbose=1,
             validation_split=0.0, patience=10, validation_data=None,
-            val_data_for_ndcg=None):
+            val_data_for_ndcg=None, features=[]):
         """Transform data and fit model.
         Parameters
         ----------
@@ -140,7 +140,7 @@ class RankerNN(object):
             Query id that represents the grouping of samples.
         """
         val_data, val_label = val_data_for_ndcg
-        features = ['f%d' % i for i in range(11)]
+        # features = ['f%d' % i for i in range(11)]
 
         class CustomEarlyStopping(keras.callbacks.Callback, RankerNN):
             def __init__(self, val_data, val_label, patience):

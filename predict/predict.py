@@ -4,6 +4,9 @@ import pandas as pd
 import numpy as np
 import copy
 import json
+import gzip
+from generate_meta_features_clf import get_meta_features_from_csv_clf
+from generate_meta_features_reg import get_meta_features_from_csv_reg
 import sys
 
 sys.path.append("..")
@@ -19,6 +22,11 @@ def transform_results(pred):
     sorted_pred = sorted_pred / (len(pred) - 1)
     return sorted_pred
 
+
+def process_cat(data, categorical_features):
+    if categorical_features:
+        data[categorical_features] = data[categorical_features].apply(lambda x: pd.factorize(x)[0])
+    return data
 
 def predict(meta_features, seed, model_path):
     model1 = LambdaRankNN()
@@ -40,11 +48,12 @@ def predict(meta_features, seed, model_path):
     return prediction
 
 
-def get_meta_features(file_path, model_path):
-    cols = ['f%d' % i for i in range(11)]
-    with open(os.path.join(file_path, 'meta_features_LTE.json'), 'r') as f:
-        mf = json.load(f)
-    df = pd.DataFrame.from_dict(mf).T
+def get_meta_features(meta_features, model_path):
+    if task == 'binary_classification':
+        cols = ['f%d' % i for i in range(11)]
+    elif task == 'regression':
+        cols = ['f%d' % i for i in range(9)]
+    df = pd.DataFrame.from_dict(meta_features).T
     df.columns = cols
     data_mean_std = pd.read_csv(os.path.join(model_path, 'mean_std_LTE.csv'))
     data_mean_std.columns = ['stats'] + cols
@@ -57,6 +66,7 @@ def get_meta_features(file_path, model_path):
 
 def get_LTE_result(meta_features, model_path):
     fi_res = {}
+    meta_features = get_meta_features(meta_features, model_path)
     for seed in [1, 2, 3, 4, 5]:
         try:
             logger.log("seed: %d" % seed)
@@ -79,39 +89,101 @@ def get_LTE_result(meta_features, model_path):
     return df
 
 
+def load_data(eval_file_path):
+    def merge_gzip_files(output_file):
+        part_files = sorted(os.listdir(eval_file_path))
+        with gzip.open(output_file, 'wb') as f_out:
+            for part_file in part_files:
+                if part_file.startswith(csv_name + '_part'):
+                    part_path = os.path.join(eval_file_path, part_file)
+                    with gzip.open(part_path, 'rb') as f_in:
+                        f_out.write(f_in.read())
+
+    for csv_name in ["train_x", "train_y", "valid_x", "valid_y", "test_x", "test_y"]:
+        output_file = os.path.join(eval_file_path, "temp.gz")
+        merge_gzip_files(output_file)
+
+        with gzip.open(output_file, 'rb') as f_in:
+            with open(os.path.join(eval_file_path, f'{csv_name}.csv'), 'wb') as f_out:
+                for line in f_in:
+                    f_out.write(line)
+        os.remove(output_file)
+
+
 def run(rank):
     logger.log("Start running file %s" % file_name)
-    file_path = os.path.join(directory, 'data/test_data_for_evaluation/' + file_name)
-    model_path = os.path.join(directory, 'models/' + model_type)
+    model_path = os.path.join(directory, 'models/' + model_dir)
+    if task == 'binary_classification':
+        file_path = os.path.join(directory, 'data/test_data/binary_classification/' + file_name)
+    elif task == 'regression':
+        file_path = os.path.join(directory, 'data/test_data/regression/' + file_name)
     eval_file_path = os.path.join(file_path, file_name + '_eval_%d' % rank)
-    meta_features = get_meta_features(eval_file_path, model_path)
-    logger.log("Successfully load the meta features of file %s in trial %d" % (file_name, rank))
+
+    logger.log("Loading data, please wait.")
+    load_data(eval_file_path)
+
+    # load data
+    train_x = pd.read_csv(os.path.join(eval_file_path, 'train_x.csv'))
+    train_y = pd.read_csv(os.path.join(eval_file_path, 'train_y.csv'))
+    valid_x = pd.read_csv(os.path.join(eval_file_path, 'valid_x.csv'))
+    valid_y = pd.read_csv(os.path.join(eval_file_path, 'valid_y.csv'))
+    categorical_features = list(train_x.select_dtypes(exclude=np.number).columns)
+    numerical_features = list(train_x.select_dtypes(include=np.number).columns)
+    train_x = process_cat(train_x, categorical_features)
+    valid_x = process_cat(valid_x, categorical_features)
+
+    data_x = pd.concat([train_x, valid_x])
+    data_y = pd.concat([train_y, valid_y])
+    logger.log("Successfully load the data.")
+    if task == 'binary_classification':
+        meta_features = get_meta_features_from_csv_clf(data_x, data_y, numerical_features, categorical_features, logger, n_jobs)
+    elif task == 'regression':
+        meta_features = get_meta_features_from_csv_reg(data_x, data_y, numerical_features, categorical_features, logger, n_jobs)
+    logger.log("Successfully get the meta features of file %s in trial %d" % (file_name, rank))
+    with open(os.path.join(eval_file_path, 'meta_features_LTE.json'), 'w') as f:
+        json.dump(meta_features, f)
+    logger.log("Successfully save the meta features into file %s" % os.path.join(eval_file_path, 'meta_features_LTE.json'))
     lte_result = get_LTE_result(meta_features, model_path)
     logger.log("Successfully get the LTE result of file %s in trial %d" % (file_name, rank))
     lte_result.to_csv(os.path.join(eval_file_path, "lte_FI_result.csv"), index=False)
+    logger.log("Successfully save the LTE result into file %s" % os.path.join(eval_file_path, "lte_FI_result.csv"))
 
 
 if __name__ == '__main__':
 
-    logger = Logger("predict_LambdaRank_LTE")
+    logger = Logger("predict_LTE")
     parser = argparse.ArgumentParser()
     parser.add_argument("-d", "--directory", help="directory of FeatureLTE", type=str, default="FeatureLTE")
     parser.add_argument("-f", "--file_name", help="file name of test data", type=str, default="[UCI]Arrhythmia")
-    parser.add_argument("-m", "--model_type", help="model type", type=str, default="LTE_models_clf")
+    parser.add_argument("-t", "--task", help="binary_classification or regression", type=str, choices=["binary_classification", "regression"], default="binary_classification")
+    parser.add_argument("-m", "--model_dir", help="model directory", type=str, default="LTE_models_clf")
+    parser.add_argument("-n", "--n_jobs", help="evaluation type", type=int, default="-1")
 
     args = parser.parse_args()
     file_name = args.file_name
+    task = args.task
     directory = args.directory
-    model_type = args.model_type
+    model_dir = args.model_dir
+    n_jobs = args.n_jobs
 
     from concurrent.futures import ProcessPoolExecutor
 
     ex = ProcessPoolExecutor(5)
+    futures = []
     try:
         for rank in range(5):
             logger.log("rank: %d" % rank)
-            ex.submit(run, rank)
+            future = ex.submit(run, rank)
+            futures.append(future)
         ex.shutdown(wait=True)
+        for future in futures:
+            try:
+                result = future.result()
+            except Exception as e:
+                logger.log(e)
+                import traceback
+
+                traceback.print_exc()
     except Exception:
         import traceback
 

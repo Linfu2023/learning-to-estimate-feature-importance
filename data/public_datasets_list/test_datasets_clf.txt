@@ -1,0 +1,46 @@
+[UCI]Arrhythmia
+[UCI]Epileptic Seizure Recognition
+[UCI]Grammatical Facial Expressions
+[UCI]Hill-Valley
+[UCI]IDA2016Challenge
+[UCI]Parkinson's Disease Classification
+[UCI]QSAR oral toxicity
+[UCI]SECOM
+[UCI]Semeion Handwritten Digit
+[UCI]p53 Mutants
+[kaggle]200+-Financial-Indicators-of-US-stocks
+[kaggle]AAC and Dipeptide Protein Dataset
+[kaggle]Asian and Indian Cuisines
+[kaggle]Detecting Anomalies in Wafer Manufacturing
+[kaggle]ECG Heartbeat Categorization Dataset
+[kaggle]Elliptic-Data-Set
+[kaggle]Malware Analysis Datasets API Call Sequences
+[kaggle]Malware Analysis Datasets Top-1000 PE Imports
+[kaggle]Malware-Analysis-Datasets
+[kaggle]Raman spectroscopy for detecting COVID-19
+[kaggle]Women Health Care
+[kaggle]flower_data
+[kc]IEEE-CIS-Fraud-Detection
+[kc]Springleaf-Marketing-Response
+[openml]AP_Breast_Omentum
+[openml]Bioresponse
+[openml]IMDB.drama
+[openml]KDD98
+[openml]KDDCup09-Appetency
+[openml]KDDCup09-Upselling
+[openml]SVHN
+[openml]SensIT-Vehicle-Combined
+[openml]Speech
+[openml]aloi
+[openml]christine
+[openml]clean1
+[openml]fri_c4_250_100
+[openml]hill-valley
+[openml]hiva_agnostic
+[openml]jasmine
+[openml]madelon
+[openml]musk
+[openml]philippine
+[openml]tecator
+[openml]w8a
+[openml]yeast_ml8
