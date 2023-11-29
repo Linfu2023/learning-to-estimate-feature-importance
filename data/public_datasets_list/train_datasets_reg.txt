@@ -1,0 +1,189 @@
+nyc_taxi_green_dec_2020
+[openml]fri_c4_1000_25
+[kc]Microsoft-Malware-Classification-Challenge
+student_performance
+car_price_assignment
+[openml]colleges_aaup
+[UCI]Steel Plates Faults
+[openml]house_16H
+Indias_population
+boom_bikes
+[openml]clean2
+abalone
+song_popularity
+ml_regression
+nyc_taxi_green_dec_2021
+warsaw_flat_rent_prices
+[openml]fri_c2_1000_50
+[openml]bank8FM
+advertising_sales
+[openml]cardiotocography
+[openml]fri_c2_1000_25
+[UCI]Wilt
+uber_and_lyft
+[openml]fri_c1_1000_10
+simple_linear_regression
+[openml]mv
+nyc_taxi_green_dec_2019
+medical_insurance_payout
+[openml]mfeat-karhunen
+kc_housesales
+factorys_salary
+[openml]PieChart3
+forest_fires
+fish_market
+superconduct_openml
+[openml]fri_c4_1000_10
+auto_data_car_price
+ols_reg_Model
+[openml]twonorm
+[kaggle]Electronic Music Features - 201611 BeatportTop100
+nyc_taxi_green_dec_2017
+productivity_prediction_of_garment_employees
+[kaggle]Sloan Digital Sky Survey DR16
+telecom_company
+bike_sharing
+ailerons
+CO2_emission_by_vehicles
+[openml]mfeat-zernike
+neural_net
+[UCI]HTRU2
+[openml]fri_c0_1000_10
+[openml]Click_prediction_small
+FEM_simulations_1
+[kaggle]EMG-gesture-classification
+dummy_marketing_and_sales_data
+poi
+[openml]pollen
+boston_house Prices_advanced_regression_techniques
+[openml]pc1
+IKEA_furniture
+number_of_upvotes
+superconduct_uci
+[openml]fri_c0_1000_5
+[UCI]Anuran Calls (MFCCs)
+appliances_energy_prediction
+[UCI]Smartphone-Based Recognition of Human Activities and Postural Transitions
+puma32h
+[openml]fri_c1_1000_50
+temperature_forecast
+oof_sample
+[openml]phoneme
+[openml]space_ga
+paris_housing_price
+[openml]fri_c2_1000_5
+[openml]bank32nh
+[openml]fri_c2_1000_10
+[kaggle]Bangla Music Dataset
+microsoft_data_science_capstone
+airfoil_self_noise
+adult_occupation
+[openml]puma8NH
+[openml]ringnorm
+house_price_prediction_challenge
+house_price_prediction
+[openml]churn
+[UCI]Weight Lifting Exercises
+delta_elevators
+[openml]kin8nm
+house_sales_in_king_county_USA
+[openml]BNG(breast-w)
+[openml]pc3
+air_quality_data_in_india
+regression_sample
+car_purchasing
+ames_housing_sales
+predicting_house_prices
+gpu_kernel_performance
+darknet_market_cocaine_listings
+[UCI]Diabetic Retinopathy Debrecen Data Set
+semester_result_of_technical_students_1
+[openml]fri_c3_1000_10
+[UCI]banknote authentication
+[openml]JapaneseVowels
+[openml]mfeat-fourier
+[openml]analcatdata_halloffame
+[openml]pc4
+medical_cost_personal
+house_prices_nominal
+belarus_used_cars_prices
+motorcycle
+ames_Iowa_housing
+[openml]fri_c3_1000_5
+[openml]autoUniv-au4-2500
+[UCI]Avila
+house_prices_advanced
+simple_regression_sample
+house_sales
+[kaggle]HR-attrition-EDA
+[UCI]Smartphone Dataset for Human Activity Recognition (HAR) in Ambient Assisted Living (AAL)
+regression_dataset
+life_expectancy
+regression_analysis_on_life_data
+[UCI]Crowdsourced Mapping
+nyc_taxi_green_dec_2018
+best_regression_model
+crab_age_prediction
+[openml]houses
+[openml]CreditCardSubset
+[kaggle]Churn Modelling
+bank32nh
+a_waiter_tips
+dubai_properties_apartments
+real_estate_price_prediction
+car_price_prediction_mu ltiple_linear_regression
+[openml]mfeat-morphological
+walmart
+[openml]abalone
+[kaggle]Well log facies dataset
+nyc_taxi_green_dec_2016
+edm
+uci_student_performance_por
+[UCI]First-order theorem proving
+[openml]fri_c0_1000_50
+pm2.5_data_of_five_chinese_cities
+[openml]eye_movements
+online_news_popularity
+[openml]ozone-level-8hr
+[openml]puma32H
+[kaggle]Predicting Profitable Customer Segments
+year
+[UCI]Human Activity Recognition Using Smartphones
+student_marks
+housing_prices
+[openml]visualizing_soil
+[openml]ada_prior
+[kaggle]Sloan Digital Sky Survey DR14
+superstore
+[kaggle]Electronic Music Features - 201802 BeatportTop100
+[kaggle]BERT-Embedded Spam messages
+baseball_player_statistics
+BMD
+US_census_demographic_data
+[kaggle]Fetal cardiotocography data
+apartments_for_sale_in_kadikoy
+[UCI]QSAR biodegradation
+USA_housing
+FEA_analysis
+brazilian_houses
+fifa
+[openml]quake
+yprop_4_1
+[openml]fri_c3_1000_50
+imdb_most_popular_Films_and_series
+chocolate_ratings
+[kaggle]Amsterdam - AirBnb
+[openml]credit-g
+triazines
+[openml]fri_c3_1000_25
+[openml]jm1
+[openml]USPS
+bike_rents
+marketing
+scpf
+startup_multiple_linear_regression
+25_unlabeled_features_target
+[openml]sylvine
+[kaggle]Telecom Churn Dataset
+cpmp_2015
+possum_regression

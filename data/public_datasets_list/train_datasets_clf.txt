@@ -1,0 +1,524 @@
+[openml]rabe_265
+[openml]vineyard
+[openml]chscase_vine1
+[openml]analcatdata_japansolvent
+[openml]squash-stored
+[openml]squash-unstored
+[openml]leukemia
+[openml]labor
+[openml]analcatdata_runshoes
+[openml]pollution
+[openml]sleuth_ex2015
+[openml]mbagrade
+[openml]sleep
+[openml]sleuth_ex1605
+[openml]white-clover
+[openml]SyskillWebert-Sheep
+[openml]analcatdata_olympic2000
+[openml]analcatdata_election2000
+[openml]fl2000
+[openml]rabe_176
+[openml]SyskillWebert-Goats
+[openml]hutsof99_logis
+[openml]confidence
+[openml]visualizing_hamster
+[openml]pyrim
+[openml]meta_ensembles.arff
+[openml]echocardiogram-uci
+[openml]kidney
+[UCI]SPECT Heart
+[UCI]Arcene
+[openml]desharnais
+[openml]analcatdata_asbestos
+[openml]sleuth_ex2016
+[openml]lupus
+[openml]visualizing_ethanol
+[openml]robot-failures-lp1
+[openml]cm1_req
+[openml]analcatdata_cyyoung9302
+[openml]analcatdata_negotiation
+[openml]auto93
+[openml]sleuth_case1202
+[openml]baskball
+[UCI]Quality Assessment of Digital Colposcopies
+[openml]lsvt
+[openml]fri_c4_100_50
+[openml]fri_c4_100_25
+[openml]fri_c0_100_50
+[openml]fri_c3_100_25
+[openml]fri_c3_100_10
+[openml]fri_c3_100_5
+[openml]fri_c2_100_10
+[openml]fri_c2_100_5
+[openml]fri_c0_100_10
+[openml]fri_c1_100_50
+[openml]fri_c0_100_25
+[openml]fri_c1_100_5
+[openml]fri_c1_100_25
+[openml]fri_c1_100_10
+[openml]fri_c3_100_50
+[UCI]Fertility
+[UCI]BLOGGER
+[UCI]Zoo
+[UCI]Autistic-Adolescent
+[openml]breast-tissue
+[openml]bridges
+[openml]ar4
+[openml]cloud
+[openml]visualizing_environmental
+[openml]robot-failures-lp4
+[openml]acute-inflammations
+[openml]KungChi3
+[openml]fruitfly
+[openml]MindCave2
+[openml]datatrieve
+[openml]echoMonths
+[openml]transplant
+[UCI]Hayes-Roth
+[openml]analcatdata_seropositive
+[kaggle]Store Data Performance
+[openml]veteran
+[openml]newton_hema
+[openml]kc1-binary
+[openml]sleuth_case2002
+[UCI]Lymphography
+[UCI]Teaching Assistant Evaluation
+[openml]grub-damage
+[openml]TuningSVMs
+[openml]fishcatch
+[openml]autoPrice
+[openml]analcatdata_gsssexsurvey
+[openml]mc2
+[UCI]Wine
+[UCI]Ultrasonic flowmeter diagnostics
+[openml]backache
+[kaggle]Shark Attack
+[openml]planning-relax
+[openml]chscase_funds
+[openml]triazines
+[openml]lowbwt
+[openml]cnae-9
+[openml]wisconsin
+[openml]flags
+[UCI]Parkinsons
+[openml]pharynx
+[openml]pwLinear
+[openml]prnn_crabs
+[kaggle]Crab body metrics
+[kaggle]Automobiles
+[openml]regime_alimentaire
+[openml]autoHorse
+[UCI]Connectionist Bench (Sonar, Mines vs. Rocks)
+[openml]biomed
+[openml]machine_cpu
+[UCI]seeds
+[openml]seeds
+[openml]seismic-bumps
+[openml]glass
+[kaggle]Compositions of Glass
+[openml]thyroid-new
+[kaggle]Campus Recruitment
+[openml]chscase_geyser1
+[openml]chscase_whale
+[openml]chatfield_4
+[UCI]Parkinson Dataset with replicated acoustic features
+[openml]fri_c0_250_5
+[openml]fri_c0_250_25
+[UCI]Qualitative_Bankruptcy
+[openml]fri_c1_250_25
+[openml]fri_c0_250_50
+[openml]fri_c0_250_10
+[openml]fri_c4_250_10
+[openml]fri_c1_250_5
+[openml]fri_c4_250_25
+[openml]fri_c3_250_50
+[openml]fri_c2_250_10
+[openml]fri_c2_250_25
+[openml]fri_c1_250_50
+[openml]fri_c3_250_5
+[openml]fri_c1_250_10
+[openml]fri_c4_250_50
+[openml]prnn_synth
+[openml]bodyfat
+[openml]MeanWhile1
+[openml]MegaWatt1
+[openml]semeion
+[UCI]User Knowledge Modeling
+[openml]analcatdata_lawsuit
+[UCI]Statlog (Heart)
+[openml]heart-statlog
+[openml]DiabeticMellitus
+[openml]mu284
+[openml]breastTumor
+[UCI]Autistic-Children
+[openml]badges2
+[kaggle]Horse Colic Dataset (with test file)
+[UCI]Horse Colic
+[openml]cholesterol
+[openml]heart-c
+[openml]cleveland
+[UCI]Z-Alizadeh Sani
+[UCI]extention of Z-Alizadeh sani dataset
+[UCI]Haberman-Survival
+[UCI]Vertebral Column
+[openml]diggle_table_a2
+[openml]plasma_retinol
+[openml]pc1_req
+[UCI]Dishonest Internet users Dataset
+[openml]visualizing_galaxy
+[openml]CastMetal1
+[UCI]Ecoli
+[openml]ecoli
+[UCI]Primary Tumor
+[kaggle]Penguins Classified
+[UCI]Ionosphere
+[openml]analcatdata_draft
+[openml]jEdit_4.2_4.3
+[openml]vinnie
+[openml]Engine1
+[openml]cars1
+[openml]autoMpg
+[openml]chscase_census6
+[openml]chscase_census5
+[openml]chscase_census4
+[openml]chscase_census2
+[kaggle]chronic kidney disease
+[openml]fri_c4_500_100
+[openml]mw1
+[openml]cars
+[UCI]MONKs Problems
+[openml]spectrometer
+[openml]wholesale-customers
+[openml]kc3
+[openml]sa-heart
+[kaggle]Crime Propensity Prisoner Dataset
+[openml]analcatdata_vineyard
+[openml]chscase_vine2
+[UCI]Thoracic Surgery Data
+[openml]analcatdata_apnea1
+[openml]analcatdata_apnea2
+[openml]PopularKids
+[kaggle]Yu-Gi-Oh Normal Monster Cards
+[openml]isolet
+[kaggle]Employee Satisfaction Index Dataset
+[openml]pm10
+[openml]fri_c4_500_50
+[openml]fri_c1_500_25
+[openml]fri_c0_500_25
+[openml]fri_c0_500_10
+[openml]fri_c0_500_50
+[openml]fri_c2_500_25
+[openml]fri_c3_500_50
+[openml]fri_c3_500_5
+[openml]fri_c3_500_25
+[openml]fri_c2_500_10
+[openml]fri_c2_500_5
+[openml]fri_c1_500_10
+[openml]fri_c1_500_5
+[openml]fri_c3_500_10
+[openml]fri_c2_500_50
+[openml]irish
+[openml]boston_corrected
+[kaggle]Collection of Classification & Regression Datasets(Movie Classification)
+[kaggle]Collection of Classification & Regression Datasets(House Price)
+[openml]boston
+[openml]rmftsa_ladata
+[kaggle]Real Estate DataSet
+[UCI]Early stage diabetes risk prediction dataset
+[UCI]Forest type mapping
+[openml]CPMP-2015-runtime-classification
+[openml]CPMP-2015-classification
+[UCI]Cylinder Bands
+[UCI]Climate Model Simulation Crashes
+[openml]arsenic-female-lung
+[openml]arsenic-male-lung
+[openml]arsenic-female-bladder
+[kaggle]Bigg Boss India
+[UCI]Breast Cancer Wisconsin (Diagnostic)
+[kaggle]Credit Card Approval
+[openml]synthetic_control
+[kaggle]Analytics Vidhya Loan Prediction
+[UCI]HCV data
+[kaggle]Metal Furnace Dataset
+[openml]balance-scale
+[kaggle]Student Alcohol Consumption
+[openml]PizzaCutter1
+[openml]disclosure_z
+[openml]disclosure_x_bias
+[openml]disclosure_x_tampered
+[kaggle]Breast Cancer Prediction
+[UCI]Statlog (Australian Credit Approval)
+[openml]breast-w
+[openml]autoUniv-au7-700
+[openml]PieChart1
+[UCI]Absenteeism at work
+[openml]PieChart2
+[kaggle]Pima-Indians_Diabetes_with_null_values
+[UCI]Audit Data
+[openml]analcatdata_authorship
+[openml]vehicle
+[UCI]Cervical cancer (Risk Factors)
+[kaggle]Cardiac Risk Prediction
+[kaggle]Startup Success Prediction
+[openml]oil_spill
+[kaggle]Message Polarity Prediction
+[openml]stock
+[kaggle]The Estonia Disaster Passenger List
+[kaggle]User OTT Consumption Profile - 2019
+[openml]autoUniv-au1-1000
+[openml]credit-g
+[kaggle]Customer Classification
+[openml]fri_c0_1000_5
+[openml]fri_c0_1000_50
+[openml]fri_c0_1000_25
+[openml]fri_c1_1000_5
+[openml]fri_c3_1000_25
+[openml]fri_c1_1000_25
+[openml]fri_c0_1000_10
+[openml]fri_c2_1000_25
+[openml]fri_c3_1000_10
+[openml]fri_c3_1000_5
+[openml]fri_c2_1000_5
+[openml]fri_c1_1000_50
+[openml]fri_c2_1000_50
+[openml]fri_c3_1000_50
+[openml]fri_c2_1000_10
+[openml]fri_c1_1000_10
+[kaggle]Sample US Taxpayer Dataset
+[openml]rmftsa_sleepdata
+[openml]PieChart3
+[openml]pc1
+[kaggle]Credit Risk Classification Dataset
+[openml]USPS
+[UCI]Diabetic Retinopathy Debrecen Data Set
+[openml]colleges_aaup
+[kaggle]Heart Disease Dataset (Comprehensive)
+[kaggle]Train Crowd Density
+[openml]analcatdata_halloffame
+[UCI]QSAR androgen receptor
+[UCI]Website Phishing
+[UCI]banknote authentication
+[kaggle]depression
+[openml]pc4
+[kaggle]HR-attrition-EDA
+[UCI]Contraceptive Method Choice
+[UCI]Yeast
+[openml]pc3
+[openml]mfeat-factors
+[UCI]Car Evaluation
+[kaggle]Bangla Music Dataset
+[kaggle]URL Spam Recognition
+[UCI]Drug consumption (quantified)
+[UCI]Steel Plates Faults
+[kaggle]RMS Lusitania Complete Passenger Manifest
+[openml]mfeat-fourier
+[openml]mfeat-morphological
+[openml]mfeat-karhunen
+[openml]autoUniv-au4-2500
+[kaggle]Diabetes Data Set
+[UCI]Wireless Indoor Localization
+[kaggle]Mobile Price Classification
+[kaggle]TabletPc_PriceClassification
+[openml]kc1
+[openml]cardiotocography
+[kaggle]Fetal cardiotocography data
+[openml]quake
+[openml]Titanic
+[kaggle]Marketing Campaign
+[kaggle]Electronic Music Features - 201611 BeatportTop100
+[openml]jungle_chess_2pcs_endgame_elephant_elephant
+[openml]jungle_chess_2pcs_endgame_lion_lion
+[openml]madeline
+[openml]gina
+[openml]ozone-level-8hr
+[UCI]Ozone Level Detection
+[kaggle]EMG-gesture-classification
+[UCI]seismic-bumps
+[kaggle]Telecom Churn Dataset
+[openml]gina_prior
+[openml]gina_agnostic
+[UCI]Malware static and dynamic features VxHeaven and Virus Total
+[kaggle]Electronic Music Features - 201802 BeatportTop100
+[UCI]First-order theorem proving
+[openml]space_ga
+[UCI]Chess (King-Rook vs. King-Pawn)
+[kaggle]Well log facies dataset
+[UCI]Smartphone-Based Recognition of Human Activities and Postural Transitions
+[kaggle]Customer Churn
+[kaggle]Cardiovascular Study Dataset
+[UCI]Smartphone Dataset for Human Activity Recognition (HAR) in Ambient Assisted Living (AAL)
+[kaggle]Campus France Rouen 2019 admission
+[openml]jungle_chess_2pcs_endgame_rat_rat
+[openml]allbp
+[openml]dis
+[openml]allrep
+[openml]Sick_numeric
+[openml]thyroid-ann
+[openml]pollen
+[UCI]Cargo 2000 Freight Tracking and Tracing
+[openml]analcatdata_supreme
+[kaggle]Email Spam Classification Dataset CSV
+[openml]ada
+[kaggle]Semantic Web Parsing Dataset Part I
+[UCI]Wilt
+[kaggle]BERT-Embedded Spam messages
+[openml]ada_prior
+[openml]jungle_chess_2pcs_endgame_panther_elephant
+[openml]jungle_chess_2pcs_endgame_lion_elephant
+[openml]jungle_chess_2pcs_endgame_panther_lion
+[openml]wilt
+[openml]waveform-5000
+[kaggle]Personal Loan Modeling
+[openml]churn
+[kaggle]Bank_Loan_Classification
+[openml]Satellite
+[UCI]Musk (Version 1)
+[openml]clean2
+[openml]compas-two-years
+[openml]banana
+[openml]phoneme
+[openml]wall-robot-navigation
+[UCI]Page Blocks Classification
+[openml]page-blocks
+[openml]pc2
+[kaggle]League of Legends 2020 Esports Match Data
+[openml]optdigits
+[kaggle]Bach Chorale Harmony Data
+[kaggle]Soccer simulation game
+[UCI]Turkiye Student Evaluation
+[kaggle]HMEQ_Data
+[openml]telco-customer-churn
+[UCI]Anuran Calls (MFCCs)
+[openml]twonorm
+[openml]ringnorm
+[kaggle]Customer Segmentation
+[openml]bank32nh
+[openml]kin8nm
+[openml]bank8FM
+[openml]puma8NH
+[openml]visualizing_soil
+[kaggle]Lead Scoring Dataset
+[openml]JapaneseVowels
+[kaggle]How severe the accident could be
+[UCI]Avila
+[kaggle]Amsterdam - AirBnb
+[UCI]Crowdsourced Mapping
+[UCI]Firm-Teacher_Clave-Direction_Classification
+[openml]jm1
+[openml]eye_movements
+[openml]pendigits
+[kaggle]Phishing website Detector
+[UCI]Phishing Websites
+[kaggle]Kyivstar Big Data test
+[kaggle]ECG Heartbeat Categorization Dataset(PTB)
+[kaggle]Online Shopper's Intention
+[kaggle]Predicting Pulsar Star
+[kaggle]Flower Type Prediction Machine Hack
+[openml]eeg-eye-state
+[kaggle]hr-comma-sep
+[kaggle]Air Traffic Data
+[openml]mozilla4
+[openml]test_dataset
+[openml]guillermo
+[openml]elevators
+[kaggle]Multiple target variable classification- Hackathon
+[openml]MagicTelescope
+[kaggle]Donors-Prediction
+[openml]letter
+[kaggle]Web Club Recruitment 2018
+[openml]houses
+[openml]house_8L
+[kaggle]aam_avaliacao_dataset
+[openml]airlines
+[openml]default-of-credit-card-clients
+[kaggle]Term Deposit Prediction Data Set
+[kaggle]Experimental_Datasets(exercise)
+[UCI]Adult
+[kaggle]Twitter Fake Account Detection
+[kaggle]Horse Racing - Tipster Bets
+[openml]BNG(breast-w)
+[openml]Click_prediction_small
+[openml]mv
+[openml]2dplanes
+[UCI]Polish companies bankruptcy data
+[openml]jungle_chess_2pcs_raw_endgame_complete
+[UCI]Bank Marketing
+[openml]electricity
+[kaggle]League of Legends Diamond Games (First 15 Minutes)
+[kaggle]telecom churn (cell2cell)
+[UCI]Activity recognition with healthy older people using a batteryless wearable sensor
+[openml]BNG(cmc)
+[UCI]Dataset for Sensorless Drive Diagnosis
+[kaggle]Pump it Up Data Mining the Water Table
+[kaggle]Travel Insurance
+[kaggle]Genetic Variant Classifications
+[UCI]Internet Firewall Data
+[UCI]Connect-4
+[kaggle]Cardio Disease
+[kaggle]Candidate Selection
+[kaggle]Preprocessed Shopee marketing data
+[UCI]Dota2 Games Results
+[UCI]Motion Capture Hand Postures
+[openml]jannis
+[openml]Run_or_walk_information
+[kaggle]Classification - Crop Damages in India (2015-2019)
+[kc]BNP-Paribas-Cardif-Claims-Management
+[kaggle]trajectory-based-ship-classification
+[kaggle]Phishing websites Data
+[openml]numerai28.6
+[openml]higgs
+[kaggle]Sloan Digital Sky Survey DR16
+[openml]Diabetes130US
+[kaggle]Airline Passenger Satisfaction
+[openml]Asteroid_Dataset
+[openml]MiniBooNE
+[kaggle]ansible-defects-prediction
+[UCI]Daphnet Freezing of Gait
+[kaggle]2018 ACS PUMS New York ONLY
+[UCI]MHEALTH Dataset
+[kaggle]JanataHack Machine Learning for Banking
+[UCI]REALDISP-Activity-Recognition-Dataset
+[kaggle]Server Logs - Suspicious
+[UCI]Census-Income (KDD)
+[kc]Instant-Gratification
+[kaggle]pump_sensor_data
+[kaggle]L&T Vehicle Loan Default Prediction
+[kc]Categorical-Feature-Encoding-Challenge
+[UCI]Crop mapping using fused optical-radar data set
+[kaggle]CC_Fraud_Dataset
+[kaggle]AV Healthcare Analytics II
+[kc]Porto-Seguro’s-Safe-Driver-Prediction
+[kc]Categorical-Feature-Encoding-Challenge-II
+[openml]codrna
+[UCI]KDD Cup 1999 Data
+[openml]sf-police-incidents
+[UCI]Record Linkage Comparison Patterns
+[UCI]Covertype
+[kaggle]The-Broken-Machine
+[openml]Klaverjas2018
+[openml]BNG(sonar)
+[openml]BNG(hepatitis)
+[openml]BNG(cylinder-bands)
+[openml]BNG(heart-statlog)
+[openml]BNG(waveform-5000)
+[openml]BNG(vehicle)
+[openml]BNG(lymph)
+[openml]BNG(adult)
+[openml]BNG(lymph,1000,10)
+[openml]BNG(lymph,1000,5)
+[openml]BNG(credit-g)
+[openml]Hyperplane_10_1E-3
+[openml]BNG(wine)
+[openml]BNG(lymph,5000,1)
+[openml]BNG(lymph,5000,10)
+[openml]BNG(lymph,5000,5)
+[openml]BNG(lymph,10000,10)
+[openml]BNG(lymph,10000,5)
+[openml]Hyperplane_10_1E-4
+[openml]BNG(credit-a)
+[openml]BNG(colic.ORIG)
+[openml]BNG(spectf_test)
+[openml]SEA(50000)
+[openml]SEA(50)
+[openml]Agrawal1
+[kaggle]ip-network-traffic-flows-labeled-with-87-apps

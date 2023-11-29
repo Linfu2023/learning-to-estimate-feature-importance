@@ -157,7 +157,8 @@ def train_and_predict(data_train, data_val, label_version, seed):
         ranker.fit(X1_trans, X2_trans, Y, W, epochs=1000,
                    batch_size=1024, patience=10,
                    validation_data=([X1_trans_val, X2_trans_val], Y_val, W_val),
-                   val_data_for_ndcg=[data_val, label_val])
+                   val_data_for_ndcg=[data_val, label_val],
+                   features=features)
         logger.log("finish fitting.")
         model_save_dir = os.path.join(directory, output_dir)
         if not os.path.exists(model_save_dir):
@@ -201,12 +202,22 @@ if __name__ == '__main__':
     logger = Logger('train_LambdaRank_LTE')
 
     ex = ProcessPoolExecutor(5)
+    futures = []
     try:
         for label_version in [1, 2, 3, 4, 5]:
             for seed in [1, 2, 3, 4, 5]:
                 logger.log([label_version, seed])
-                ex.submit(run, label_version, seed)
+                future = ex.submit(run, label_version, seed)
+                futures.append(future)
         ex.shutdown(wait=True)
+        for future in futures:
+            try:
+                result = future.result()
+            except Exception as e:
+                logger.log(e)
+                import traceback
+
+                traceback.print_exc()
 
     except Exception:
         import traceback

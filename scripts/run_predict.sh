@@ -1,0 +1,1 @@
+python ../predict/predict.py --directory ../ --file_name [UCI]Arrhythmia --task binary_classification --model_dir LTE_models_clf --n_jobs 8

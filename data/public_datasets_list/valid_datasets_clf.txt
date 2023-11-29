@@ -1,0 +1,131 @@
+[openml]hip
+[openml]elusage
+[openml]analcatdata_bondrate
+[openml]analcatdata_happiness
+[openml]prnn_viruses
+[openml]rabe_148
+[openml]meta_batchincremental.arff
+[openml]analcatdata_gviolence
+[openml]fri_c4_100_100
+[openml]analcatdata_broadway
+[openml]analcatdata_cyyoung8092
+[openml]fri_c2_100_25
+[openml]fri_c0_100_5
+[openml]fri_c4_100_10
+[openml]fri_c2_100_50
+[openml]analcatdata_creditscore
+[openml]ar6
+[openml]analcatdata_michiganacc
+[UCI]Breast Cancer Coimbra
+[openml]rabe_266
+[openml]iris
+[openml]analcatdata_wildcat
+[UCI]HCC Survival
+[UCI]Divorce Predictors data set
+[openml]KnuggetChase3
+[openml]autos
+[openml]cpu
+[openml]prnn_fglass
+[kaggle]Candidate Evaluation Data used for Classification
+[kaggle]Development Index
+[openml]lungcancer_GSE31210
+[openml]fri_c3_250_10
+[openml]fri_c2_250_5
+[openml]fri_c3_250_25
+[openml]fri_c2_250_50
+[openml]rmftsa_ctoarrivals
+[openml]SPECTF
+[openml]jEdit_4.0_4.2
+[openml]analcatdata_broadwaymult
+[openml]CostaMadre1
+[UCI]Heart failure clinical records
+[openml]cleve
+[kaggle]Crystal System Properties for Li-ion batteries
+[kaggle]Warranty Claims (with only Unique values)
+[openml]dermatology
+[openml]chscase_census3
+[openml]braziltourism
+[UCI]Congressional Voting Records
+[openml]analcatdata_apnea3
+[kaggle]fitbit dataset
+[openml]no2
+[openml]fri_c0_500_5
+[openml]fri_c4_500_10
+[openml]fri_c4_500_25
+[openml]fri_c1_500_50
+[openml]collins
+[openml]arsenic-male-bladder
+[kaggle]Breast Cancer Dataset
+[UCI]ILPD (Indian Liver Patient Dataset)
+[openml]strikes
+[openml]disclosure_x_noise
+[openml]Australian
+[UCI]Credit Approval
+[UCI]Blood Transfusion Service Center
+[kaggle]Audit Data
+[UCI]QSAR Bioconcentration classes dataset
+[openml]fri_c4_1000_100
+[UCI]Tic-Tac-Toe Endgame
+[openml]tokyo1
+[UCI]Mammographic Mass
+[openml]vowel
+[UCI]Statlog (German Credit Data)
+[openml]fri_c4_1000_25
+[openml]fri_c4_1000_50
+[openml]fri_c4_1000_10
+[kaggle]Employee Attrition
+[openml]PizzaCutter3
+[UCI]QSAR biodegradation
+[kaggle]Mice Protein Expression
+[openml]socmob
+[kaggle]Strategeion Resume Skills
+[openml]mfeat-zernike
+[openml]segment
+[UCI]Thyroid Disease
+[UCI]Weight Lifting Exercises
+[kaggle]Client churn rate in Telecom sector
+[openml]abalone
+[UCI]Statlog (Landsat Satellite)
+[UCI]Spambase
+[UCI]Gisette
+[kaggle]Disease Symptom Prediction
+[UCI]Waveform Database Generator (Version 1)
+[openml]sylvine
+[UCI]Human Activity Recognition Using Smartphones
+[UCI]Shill Bidding Dataset
+[kaggle]Predicting Profitable Customer Segments
+[openml]delta_ailerons
+[kaggle]Assay of serum free light chain
+[openml]puma32H
+[kc]Microsoft-Malware-Classification-Challenge
+[openml]mc1
+[openml]delta_elevators
+[kaggle]Churn Modelling
+[kaggle]Sloan Digital Sky Survey DR14
+[openml]sylva_prior
+[kaggle]Classify gestures by reading muscle activity
+[openml]CreditCardSubset
+[openml]pol
+[UCI]HTRU2
+[kaggle]HR analysis
+[openml]house_16H
+[UCI]Nomao
+[kaggle]Income Predictions Dataset(2 class classification)
+[kaggle]Success of Bank Telemarketing Data
+[kaggle]Online News Popularity
+[openml]fried
+[UCI]Statlog (Shuttle)
+[kaggle]HR Analysis Case Study
+[kaggle]CSGO Round Winner Classification
+[kaggle]Rain in Australia
+[openml]skin-segmentation
+[kaggle]Richter's Predictor Modeling Earthquake Damage
+[UCI]Human-Activity-Recognition
+[kaggle]Janatahack cross-sell prediction
+[openml]codrnaNorm
+[openml]BNG(labor)
+[openml]BNG(lymph,10000,1)
+[openml]BNG(colic)
+[openml]BNG(lymph,1000,1)
+[openml]BNG(Australian)
+[openml]BNG(SPECTF)

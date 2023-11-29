@@ -1,0 +1,47 @@
+vehicle
+diamonds
+red_wine_quality
+powerlifting_benchPress_weight
+mv
+[kaggle]Predicting Pulsar Star
+calculate_concrete_strength
+graduate_admission_2
+india_house
+puma8nh
+[UCI]Malware static and dynamic features VxHeaven and Virus Total
+black_friday
+second_hand_cars
+steel_industry_energy_consumption
+[openml]fri_c0_1000_25
+100000_UK_used_car
+[openml]fri_c4_1000_50
+[openml]wilt
+[openml]segment
+[kaggle]Client churn rate in Telecom sector
+gemstone_price
+[openml]BNG(cmc)
+[openml]fri_c1_1000_5
+white_wine_quality
+[openml]house_8L
+california
+stock
+[openml]fri_c1_1000_25
+analcatdata_supreme
+kin8nm
+[UCI]Motion Capture Hand Postures
+[openml]MagicTelescope
+2dplanes
+akshith
+[kaggle]Mice Protein Expression
+fried
+[openml]PizzaCutter3
+[openml]default-of-credit-card-clients
+[kaggle]Customer Churn
+[openml]higgs
+laptop_price
+[openml]mozilla4
+[UCI]Shill Bidding Dataset
+used_car_price
+[openml]Run_or_walk_information
+machine_hack_housing_price
+revisiting_a_concrete_strength_regression
