@@ -5,8 +5,6 @@ import numpy as np
 import copy
 import json
 import gzip
-from generate_meta_features_clf import get_meta_features_from_csv_clf
-from generate_meta_features_reg import get_meta_features_from_csv_reg
 import sys
 
 sys.path.append("..")
@@ -48,7 +46,7 @@ def predict(meta_features, seed, model_path):
     return prediction
 
 
-def get_meta_features(meta_features, model_path):
+def get_meta_features(meta_features, model_path, task):
     if task == 'binary_classification':
         cols = ['f%d' % i for i in range(11)]
     elif task == 'regression':
@@ -64,9 +62,9 @@ def get_meta_features(meta_features, model_path):
     return df
 
 
-def get_LTE_result(meta_features, model_path):
+def get_LTE_result(meta_features, model_path, logger, task):
     fi_res = {}
-    meta_features = get_meta_features(meta_features, model_path)
+    meta_features = get_meta_features(meta_features, model_path, task)
     for seed in [1, 2, 3, 4, 5]:
         try:
             logger.log("seed: %d" % seed)
@@ -143,13 +141,15 @@ def run(rank):
     with open(os.path.join(eval_file_path, 'meta_features_LTE.json'), 'w') as f:
         json.dump(meta_features, f)
     logger.log("Successfully save the meta features into file %s" % os.path.join(eval_file_path, 'meta_features_LTE.json'))
-    lte_result = get_LTE_result(meta_features, model_path)
+    lte_result = get_LTE_result(meta_features, model_path, logger, task)
     logger.log("Successfully get the LTE result of file %s in trial %d" % (file_name, rank))
     lte_result.to_csv(os.path.join(eval_file_path, "lte_FI_result.csv"), index=False)
     logger.log("Successfully save the LTE result into file %s" % os.path.join(eval_file_path, "lte_FI_result.csv"))
 
 
 if __name__ == '__main__':
+    from generate_meta_features_clf import get_meta_features_from_csv_clf
+    from generate_meta_features_reg import get_meta_features_from_csv_reg
 
     logger = Logger("predict_LTE")
     parser = argparse.ArgumentParser()

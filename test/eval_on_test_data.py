@@ -2,12 +2,12 @@ import argparse
 import gzip
 import os
 import json
-from sklearn.metrics import roc_auc_score
-from eval_util import *
+from sklearn.metrics import roc_auc_score, mean_absolute_percentage_error
 import sys
 
 sys.path.append("..")
 from train.logger import Logger
+from eval_utils import *
 
 
 def process_cat_fea(data, categorical_features):
@@ -18,24 +18,29 @@ def process_cat_fea(data, categorical_features):
     return data
 
 
-def evaluation(train_x, train_y, valid_x, valid_y, test_x, test_y, fi, n_jobs):
+def evaluation(train_x, train_y, valid_x, valid_y, test_x, test_y, fi, n_jobs, logger, task):
     seed_result = dict()
     for k in [5, 10, 15, 20, 100]:
-        logger.log("Start running file %s in k=%s" % (file_name, str(k)))
+        logger.log("Start running file in k=%s" % str(k))
         train_x_sub, valid_x_sub, test_x_sub = selection_according_to_prediction(train_x, valid_x, test_x, fi,
                                                                                  percent=0.01 * k)
 
-        best_params, cv_auc = gridsearch_tuning(train_x_sub, train_y, valid_x_sub, valid_y, n_jobs)
+        best_params, _ = gridsearch_tuning(train_x_sub, train_y, valid_x_sub, valid_y, n_jobs, task)
         logger.log("============best params===================")
         logger.log(best_params)
 
-        gbm = lgb.LGBMClassifier(**best_params)
-
-        gbm.fit(train_x_sub.values, train_y.values.ravel())
-        pred = gbm.predict_proba(test_x_sub)
-        pred = pred[:, 1]
-        seed_result["k%s" % str(k)] = roc_auc_score(test_y.values.ravel(), pred)
-        logger.log("Finish running file %s in k=%s" % (file_name, str(k)))
+        if task == 'binary_classification':
+            gbm = lgb.LGBMClassifier(**best_params)
+            gbm.fit(train_x_sub.values, train_y.values.ravel())
+            pred = gbm.predict_proba(test_x_sub)
+            pred = pred[:, 1]
+            seed_result["k%s" % str(k)] = roc_auc_score(test_y.values.ravel(), pred)
+        elif task == 'regression':
+            gbm = lgb.LGBMRegressor(**best_params)
+            gbm.fit(train_x_sub.values, train_y.values.ravel())
+            pred = gbm.predict(test_x_sub)
+            seed_result["k%s" % str(k)] = mean_absolute_percentage_error(test_y.values.ravel(), pred)
+        logger.log("Finish running file in k=%s" % str(k))
     return seed_result
 
 
@@ -90,26 +95,26 @@ def run(rank):
         for seed in range(1, 6):
             logger.log("Start running file %s in seed %d" % (file_name, seed))
             fi = dict(zip(lte_result['feature_name'], lte_result['V%d' % seed]))
-            seed_result = evaluation(train_x, train_y, valid_x, valid_y, test_x, test_y, fi, n_jobs)
+            seed_result = evaluation(train_x, train_y, valid_x, valid_y, test_x, test_y, fi, n_jobs, logger, task)
             eval_result["seed%d" % seed] = seed_result
     else:
         if eval_type == "mdi_default":
-            fi = get_mdi_default_result(train_x, train_y, valid_x, valid_y)
+            fi = get_mdi_default_result(train_x, train_y, valid_x, valid_y, n_jobs, task)
         elif eval_type == "mdi_tuned":
-            fi = get_mdi_tuned_result(train_x, train_y, valid_x, valid_y)
+            fi = get_mdi_tuned_result(train_x, train_y, valid_x, valid_y, n_jobs, task)
         elif eval_type == "shap_default":
-            fi = get_shap_default_result(train_x, train_y, valid_x, valid_y)
+            fi = get_shap_default_result(train_x, train_y, valid_x, valid_y, n_jobs, task)
         elif eval_type == "shap_tuned":
-            fi = get_shap_tuned_result(train_x, train_y, valid_x, valid_y)
+            fi = get_shap_tuned_result(train_x, train_y, valid_x, valid_y, n_jobs, task)
         elif eval_type == "pi_single":
-            fi = get_pi_single_result(train_x, train_y, valid_x, valid_y)
+            fi = get_pi_single_result(train_x, train_y, valid_x, valid_y, n_jobs, task)
         elif eval_type == "pi_ensemble":
-            fi = get_pi_ensemble_result(train_x, train_y, valid_x, valid_y)
+            fi = get_pi_ensemble_result(train_x, train_y, valid_x, valid_y, n_jobs, task)
         else:
             raise ValueError("Invalid eval type: %s!" % eval_type)
         with open(os.path.join(eval_file_path, "%s_FI_result.json" % eval_type), 'w') as f0:
             json.dump(fi, f0)
-        eval_result = evaluation(train_x, train_y, valid_x, valid_y, test_x, test_y, fi, n_jobs)
+        eval_result = evaluation(train_x, train_y, valid_x, valid_y, test_x, test_y, fi, n_jobs, task)
     with open(os.path.join(eval_file_path, "%s_eval_result.json" % eval_type), 'w') as f1:
         json.dump(eval_result, f1)
     return eval_result
