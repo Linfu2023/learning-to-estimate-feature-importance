@@ -13,7 +13,9 @@ We provide the pre-trained LTE models in the repository, see:
 * [`models/LTE_models_clf`](models/LTE_models_clf) for binary classification tasks with 25 different models in total
 * [`models/LTE_models_reg`](models/LTE_models_reg)  for regression tasks with 25 different models in total
 
-The specific model name, for example, `LTE_s1_v1` stands for training from data_gen_random_seed=1 & training_random_seed=1.
+The specific model name e.g. `LTE_s1_v3` stands for:
+* set random_seed=3 when generate meta datasets for training 
+* set random_seed=1 when training LTE models
 
 ## Public datasets
 We build our pre-trained models for binary classification and regression problems using observations from nearly **1,000 public datasets**.
