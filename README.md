@@ -4,7 +4,7 @@ FeatureLTE: Learning to Estimate Feature Importance
 
 FeatureLTE is a learning-based technique of estimating feature importance. It learns pre-computed high-quality feature
 importance scores from a large number of datasets. We build our pre-trained models for binary classification and regression problems using observations from nearly
-1,000 public datasets, and the models can be used to predict Feature Importance Score of the input dataset.
+1,000 public datasets, and the models can be used to predict feature importance score of the input dataset.
 
 ## Pre-trained LTE models
 
@@ -13,13 +13,13 @@ We provide the pre-trained LTE models in the repository, see:
 * [`models/LTE_models_clf`](models/LTE_models_clf) for binary classification tasks with 25 different models in total
 * [`models/LTE_models_reg`](models/LTE_models_reg)  for regression tasks with 25 different models in total
 
-The specific model name e.g. `LTE_s1_v1` stands for training from random_seed=1 & label_version=1.
+The specific model name, for example, `LTE_s1_v1` stands for training from data_gen_random_seed=1 & training_random_seed=1.
 
-## Opensource datasets
+## Public datasets
 We build our pre-trained models for binary classification and regression problems using observations from nearly **1,000 public datasets**.
 Dur to the space limitations of the repository, we only provide the test datasets, see [`data/test_data`](data/test_data).
 
-We list all the datasets used for FeatureLTE at [`data/public_datasets_list`](data/public_datasets_list).  They can be found at public websites easily. 
+We list all the datasets used for FeatureLTE at [`data/public_datasets_list`](data/public_datasets_list).  They can be found at public websites directly. 
 * [`train_datasets_clf.txt`](data/public_datasets_list/train_datasets_clf.txt): training datasets used in binary classification FeatureLTE  
 * [`train_datasets_reg.txt`](data/public_datasets_list/train_datasets_reg.txt): training datasets used in regression FeatureLTE
 * [`valid_datasets_clf.txt`](data/public_datasets_list/valid_datasets_clf.txt): validation datasets used in binary classification FeatureLTE
@@ -27,8 +27,10 @@ We list all the datasets used for FeatureLTE at [`data/public_datasets_list`](da
 * [`test_datasets_clf.txt`](data/public_datasets_list/test_datasets_clf.txt): test datasets used in binary classification FeatureLTE
 * [`test_datasets_reg.txt`](data/public_datasets_list/test_datasets_reg.txt): test datasets used in regression FeatureLTE
 
-Since our model was trained using a **meta-learning** approach, we have placed the metadata used for training in the repository. See the folder [`data/train_data`](data/train_data) & [`data/valid_data`](data/valid_data) & [`data/test_data`](data/test_data).  
-[**Training FeatureLTE Model from Scratch**](#Training FeatureLTE Model from Scratch)  will introduce how to reproduce the LTE models with the metadata.
+The dataset provided in the list above is in the format of [data_source]data_name, e.g., [openml]BNG(lymph,nominal,1000000) refers this dataset at https://www.openml.org/search?type=data&sort=runs&id=76&status=active
+
+Since our model was trained using a **meta-learning** approach, we have placed the meta datasets used for training, validation and test in the repository. See the folder [`data/train_data`](data/train_data) & [`data/valid_data`](data/valid_data) & [`data/test_data`](data/test_data).  
+[**Training FeatureLTE Model from Scratch**](#Training FeatureLTE Model from Scratch)  will introduce how to reproduce the LTE models with the meta datasets.
 
 ## Installing Dependencies
 
@@ -68,18 +70,18 @@ $ cd FeatureLTE/scripts
 $ sh run_predict.sh
 ```
 
-This script can generate the *Feature Importance Score* by modify the arguments:
+This script can generate the *Feature Importance Score* by providing the arguments:
 
 * `file_name` specify a certain dataset from folder [`data/test_data`](data/test_data)
 * `model_dir` choose the models in folder [`models`](models), depends on a binary classification or regression task
 * `task` specify a binary classification task or a regression task
 
-Every test dataset was split into 5 folds randomly: `<file_name>_eval_0` ~ `<file_name>_eval_4`, the scripts will deal with
+Every test dataset has been split into 5 folds randomly: `<file_name>_eval_0` ~ `<file_name>_eval_4`, the scripts will proceed with
 all these 5 datasets in parallel,
 It saves the feature importance scores into CSV file `lte_FI_result.csv`, at the directory of each dataset.  
-e.g.  `data/test_data/binary_classification/[UCI]Arrhythmia/[UCI]Arrhythmia_eval_4/lte_FI_result.csv`.  
+e.g.,  `data/test_data/binary_classification/[UCI]Arrhythmia/[UCI]Arrhythmia_eval_4/lte_FI_result.csv`.  
 
-Here's a example of LTE predict result:
+Here is an example of LTE prediction result:
 
 | feature_name | V1     | V2     | V3     | V4     | V5     | mean   |
 |--------------|--------|--------|--------|--------|--------|--------|
@@ -94,7 +96,7 @@ Here's a example of LTE predict result:
 
 Also the *meta features* generated during the prediction will be saved into json file `meta_features_LTE.json`, at the
 directory of each dataset.   
-e.g.  `data/test_data/binary_classification/[UCI]Arrhythmia/[UCI]Arrhythmia_eval_4/meta_features_LTE.json`.  
+e.g.,  `data/test_data/binary_classification/[UCI]Arrhythmia/[UCI]Arrhythmia_eval_4/meta_features_LTE.json`.  
 
 ## Evaluate an LTE Model
 
@@ -120,7 +122,7 @@ This script can generate the *AUC Score* by modify the arguments:
     * pi_ensemble
 * `task` specify a binary classification task or a regression task
 
-At the evaluation phase, we will train fine-tuned LightGBM models using the test data with complete feature set and
+At the evaluation phase, we will train fine-tuned boosted tree models using the test data with complete feature set and
 feature subsets, which was selected based on the prediction result (top 5%, 10%, 15%, 20%).  
 The evaluation result will be saved into json file `<eval_type>_eval_result.json`, at the directory of each dataset.  
 e.g.  `data/test_data/binary_classification/[UCI]Arrhythmia/[UCI]Arrhythmia_eval_4/lte_eval_result.json`.   
