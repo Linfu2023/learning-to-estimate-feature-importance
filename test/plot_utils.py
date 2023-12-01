@@ -55,7 +55,7 @@ def plot_fig2(data_path, output_path):
     plt.savefig(output_path, format='pdf', bbox_inches='tight')
 
 
-def plot_fig4(data_path, output_path):
+def plot_fig4(data_path, output_path, simple):
     matplotlib.rcParams['pdf.fonttype'] = 42
     matplotlib.rcParams['ps.fonttype'] = 42
     colors = ['#fbbb6b', '#ff9c00', '#44b4e0', 'blue', '#c0b4d6', '#7b6bae', 'purple', '#009900']
@@ -77,14 +77,19 @@ def plot_fig4(data_path, output_path):
     ax.spines['bottom'].set_visible(True)
     ax.spines['left'].set_visible(True)
 
-    # 绘制折线图
-    ax.plot(rt_data['mdi_default'], label='MDI-default', marker='o', color=colors[0], markersize=5, linewidth=2)
-    ax.plot(rt_data['mdi_tuned'], label='MDI-tuned', marker='o', color=colors[1], markersize=5, linewidth=2)
-    ax.plot(rt_data['shap_default'], label='SHAP-default', marker='o', color=colors[2], markersize=5, linewidth=2)
-    ax.plot(rt_data['shap_tuned'], label='SHAP-tuned', marker='o', color=colors[3], markersize=5, linewidth=2)
-    ax.plot(rt_data['pi_single'], label='PI-single', marker='o', color=colors[5], markersize=5, linewidth=2)
-    ax.plot(rt_data['pi_ensemble'], label='PI-ensemble', marker='o', color=colors[6], markersize=5, linewidth=2)
-    ax.plot(rt_data['lte'], label='LTE', marker='o', color=colors[-1], markersize=5, linewidth=2)
+    if simple:
+        ax.plot(rt_data['mdi_default'], label='MDI-default', marker='o', color=colors[0], markersize=5, linewidth=2)
+        ax.plot(rt_data['mdi_tuned'], label='MDI-tuned', marker='o', color=colors[1], markersize=5, linewidth=2)
+        ax.plot(rt_data['shap_default'], label='SHAP-default', marker='o', color=colors[2], markersize=5, linewidth=2)
+        ax.plot(rt_data['lte'], label='LTE', marker='o', color=colors[-1], markersize=5, linewidth=2)
+    else:
+        ax.plot(rt_data['mdi_default'], label='MDI-default', marker='o', color=colors[0], markersize=5, linewidth=2)
+        ax.plot(rt_data['mdi_tuned'], label='MDI-tuned', marker='o', color=colors[1], markersize=5, linewidth=2)
+        ax.plot(rt_data['shap_default'], label='SHAP-default', marker='o', color=colors[2], markersize=5, linewidth=2)
+        ax.plot(rt_data['shap_tuned'], label='SHAP-tuned', marker='o', color=colors[3], markersize=5, linewidth=2)
+        ax.plot(rt_data['pi_single'], label='PI-single', marker='o', color=colors[5], markersize=5, linewidth=2)
+        ax.plot(rt_data['pi_ensemble'], label='PI-ensemble', marker='o', color=colors[6], markersize=5, linewidth=2)
+        ax.plot(rt_data['lte'], label='LTE', marker='o', color=colors[-1], markersize=5, linewidth=2)
 
     ax.set_xlim(0, 7.1)
     ax.set_xticks(np.arange(0, 8), ['0', '1M', '2M', '3M', '4M', '5M', '6M', '7M'])
@@ -103,7 +108,3 @@ def plot_fig4(data_path, output_path):
     plt.grid(linestyle="--", alpha=0.5)  # 设置背景网格线为虚线
     # 显示图形
     plt.savefig(output_path, format='pdf', dpi=600, bbox_inches='tight')
-
-
-def plot_fig4():
-    pass
