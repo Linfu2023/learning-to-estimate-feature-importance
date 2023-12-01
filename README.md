@@ -213,7 +213,12 @@ It will evaluate on both of them, you can modify the argument in [`scripts/run_e
 
 The arguments are:
 * `rounds`: we evaluate from datasize: 1 million to 7 million, you can set this argument from 1 to 7 to adjust, default is 1
-* `simple`: since method like PI-ensemble takes a really long time to evaluate (over 100,000 seconds on 1 million scale), the scripts default runs on **LTE**, **MDI-default**, **MDI-tuned** and **SHAP-default**, which can be done in 1000 seconds on 1 million data size.
+* `simple`: since method like PI-ensemble takes a really long time to evaluate (over 100,000 seconds on 1 million scale), the scripts default runs on LTE, MDI-default, MDI-tuned and SHAP-default, which can be done in 1000 seconds on 1 million data size.
+
+If you want to reproduce the full results, please set the following parameters:
+```bash
+python ../test/eval_running_time.py --rounds 7 --directory ../ --n_jobs 8
+```
 
 and the specific numbers will be saved into 
 * `test/eval_result_files/clf_running time_result.json`
@@ -228,7 +233,7 @@ The plot result will be saved into
 Here is one of the running time evaluation results that will be saved by executing the scripts above with default arguments:  
 `clf_running time_result.json`
 
-**It's worth noting that our results were obtained on a MacBook with 8 cores and 16GB memory, and different devices may yield varying numerical results. However, the overall proportions should remain consistent.**
+**It's worth noting that our results were obtained on a MacBook with 8 cores and 16GB memory, and different devices may yield varying numerical results.**
 
 
 ```json
