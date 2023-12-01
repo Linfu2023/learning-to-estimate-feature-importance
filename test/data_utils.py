@@ -132,6 +132,6 @@ def merge_eval_results(test_data_list, directory):
     cd_diagram_clf_df = pd.DataFrame(cd_diagram_clf, columns=CD_DIAGRAM_COLS)
     cd_diagram_reg_df = pd.DataFrame(cd_diagram_reg, columns=CD_DIAGRAM_COLS)
 
-    cd_diagram_clf_df.to_csv(os.path.join(directory, "test/eval_result_files/clf_eval_result_fig3.csv"), index=False)
-    cd_diagram_reg_df.to_csv(os.path.join(directory, "test/eval_result_files/reg_eval_result_fig3.csv"), index=False)
+    cd_diagram_clf_df.to_csv(os.path.join(directory, "test/eval_result_files/clf_eval_result_fig2.csv"), index=False)
+    cd_diagram_reg_df.to_csv(os.path.join(directory, "test/eval_result_files/reg_eval_result_fig2.csv"), index=False)
 
