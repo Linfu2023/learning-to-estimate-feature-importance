@@ -56,7 +56,7 @@ $ sh run_train_LTE_classification.sh
 ```
 
 Then it will start to run the training scripts of reproducing the LTE models of binary classification tasks.
-The models will be saved into the path from argument `output_dir` e.g. [`models/LTE_models_clf`](models/LTE_models_clf). Similarly, the LTE models of regression tasks can be reproduced by running:
+The models will be saved into the path from argument `output_dir`, default is[`models/LTE_models_clf`](models/LTE_models_clf). Similarly, the LTE models of regression tasks can be reproduced by running:
 
 * regression task:
 
@@ -64,26 +64,30 @@ The models will be saved into the path from argument `output_dir` e.g. [`models/
 $ cd FeatureLTE/scripts
 $ sh run_train_LTE_regression.sh
 ```
+The models will be saved into the path from argument `output_dir`, default is [`models/LTE_models_reg`](models/LTE_models_reg). 
 
 ## Predict with LTE models
 
+You can run a quick prediction demo by executing the scripts below:
 ```bash
 $ cd FeatureLTE/scripts
 $ sh run_predict.sh
 ```
-
 This script can generate the *Feature Importance Score* by providing the arguments:
+* `directory` root directory of FeatureLTE
+* `file_name` specify a certain dataset from folder [`data/test_data`](data/test_data), default is "[UCI]Arrhythmia"
+* `task` specify a binary classification task or a regression task, default is "binary_classification"
+* `model_dir` choose the models in folder [`models`](models), depends on a binary classification or regression task, default is "LTE_models_clf"
 
-* `file_name` specify a certain dataset from folder [`data/test_data`](data/test_data)
-* `model_dir` choose the models in folder [`models`](models), depends on a binary classification or regression task
-* `task` specify a binary classification task or a regression task
 
 Every test dataset has been split into 5 folds randomly: `<file_name>_eval_0` ~ `<file_name>_eval_4`, the scripts will proceed with
 all these 5 datasets in parallel,
-It saves the feature importance scores into CSV file `lte_FI_result.csv`, at the directory of each dataset.  
-e.g.,  `data/test_data/binary_classification/[UCI]Arrhythmia/[UCI]Arrhythmia_eval_4/lte_FI_result.csv`.  
+It saves the feature importance scores into CSV file `lte_FI_result.csv`, at the directory of each dataset. 
 
-Here is an example of LTE prediction result:
+Here is one of the LTE prediction results that will be saved by executing the scripts above with default arguments:
+
+ `data/test_data/binary_classification/[UCI]Arrhythmia/[UCI]Arrhythmia_eval_0/lte_FI_result.csv`.  
+
 
 | feature_name | V1     | V2     | V3     | V4     | V5     | mean   |
 |--------------|--------|--------|--------|--------|--------|--------|
@@ -106,66 +110,69 @@ After the LTE model was successfully trained and saved, we can evaluate the mode
 First make sure you have performed the previous step [**Predict with LTE models**](#Predict with LTE models) and produced feature importance scores
 into `lte_FI_result.csv`.
 
+Then you can run a quick evaluation demo by executing the scripts below:
+
 ```bash
-$ cd featurelte
+$ cd FeatureLTE/scripts
 $ sh run_eval.sh
 ```
 
 This script can generate the *AUC Score* by modify the arguments:
 
-* `file_name` specify a certain dataset from folder [`data/test_data`](data/test_data)
+* `directory` root directory of FeatureLTE
+* `file_name` specify a certain dataset from folder [`data/test_data`](data/test_data), default is "[UCI]Arrhythmia"
 * `eval_type` choose the FIS method, with options:
-    * lte
+    * lte (default)
     * mdi_default
     * mdi_tuned
     * shap_default
     * shap_tuned
     * pi_single
     * pi_ensemble
-* `task` specify a binary classification task or a regression task
+* `task` specify a binary classification task or a regression task, default is "binary_classification"
 
 At the evaluation phase, we will train fine-tuned boosted tree models using the test data with complete feature set and
 feature subsets, which was selected based on the prediction result (top 5%, 10%, 15%, 20%).  
-The evaluation result will be saved into json file `<eval_type>_eval_result.json`, at the directory of each dataset.  
-e.g.  `data/test_data/binary_classification/[UCI]Arrhythmia/[UCI]Arrhythmia_eval_4/lte_eval_result.json`.   
+The evaluation result will be saved into json file `<eval_type>_eval_result.json`, at the directory of each dataset.
 
-Here's a example of evaluation result:
+Here is one of the LTE evaluation results that will be saved by executing the scripts above with default arguments:
+`data/test_data/binary_classification/[UCI]Arrhythmia/[UCI]Arrhythmia_eval_0/lte_eval_result.json`.   
 ```json
 {
   "seed1": {
-    " k5": 0.8635416666666667,
-    " k10": 0.9015625,
-    " k15": 0.8841145833333334,
-    " k20": 0.8619791666666667,
-    " k100": 0.8895833333333333
+    "k5": 0.8635416666666667,
+    "k10": 0.9015625,
+    "k15": 0.8841145833333334,
+    "k20": 0.8619791666666667,
+    "k100": 0.8895833333333333
   },
   "seed2": {
-    " k5": 0.8635416666666667,
-    " k10": 0.8807291666666667,
-    " k15": 0.8664062499999999,
-    " k20": 0.8619791666666667,
-    " k100": 0.8895833333333333
+    "k5": 0.8635416666666667,
+    "k10": 0.8807291666666667,
+    "k15": 0.8664062499999999,
+    "k20": 0.8619791666666667,
+    "k100": 0.8895833333333333
   },
   "seed3": {
-    " k5": 0.8635416666666667,
-    " k10": 0.8791666666666667,
-    " k15": 0.8664062499999999,
-    " k20": 0.8619791666666667,
-    " k100": 0.8895833333333333
+    "k5": 0.8635416666666667,
+    "k10": 0.8791666666666667,
+    "k15": 0.8664062499999999,
+    "k20": 0.8619791666666667,
+    "k100": 0.8895833333333333
   },
   "seed4": {
-    " k5": 0.8572916666666666,
-    " k10": 0.8619791666666666,
-    " k15": 0.8664062499999999,
-    " k20": 0.8619791666666667,
-    " k100": 0.8895833333333333
+    "k5": 0.8572916666666666,
+    "k10": 0.8619791666666666,
+    "k15": 0.8664062499999999,
+    "k20": 0.8619791666666667,
+    "k100": 0.8895833333333333
   },
   "seed5": {
-    " k5": 0.875,
-    " k10": 0.8807291666666667,
-    " k15": 0.8515625,
-    " k20": 0.8619791666666667,
-    " k100": 0.8895833333333333
+    "k5": 0.875,
+    "k10": 0.8807291666666667,
+    "k15": 0.8515625,
+    "k20": 0.8619791666666667,
+    "k100": 0.8895833333333333
   }
 }
 ```
@@ -178,3 +185,29 @@ Here's a example of evaluation result:
   * **AUC Scores** from binary classification tasks
   * **MAPE Scores** from regression tasks
 
+## Reproduce the Evaluation Result
+We have evaluated our LTE models on the test dataset from folder [`data/test_data`](data/test_data), the evaluation result can be reproduced by directly executing the scripts below:
+```bash
+$ cd FeatureLTE/scripts
+$ sh run_reproduce.sh
+```
+It will evaluate on all the test datasets with different evaluation method, the plot result will be saved into  
+* [`test/eval_result_files/clf_eval_result_fig2.pdf`](test/eval_result_files/clf_eval_result_fig2.pdf)
+* [`test/eval_result_files/reg_eval_result_fig2.pdf`](test/eval_result_files/reg_eval_result_fig2.pdf)
+
+Those plots are consistent with those presented in Figure 2 of our paper.
+
+## Evaluate the Running time
+We discussed the efficiency of FIS estimation for LTE models in our paper, and the running time of different methods are showed in Figure 4. You can reproduce the result by directly executing the scripts below:
+```bash
+$ cd FeatureLTE/scripts
+$ sh run_eval_running_time.sh
+```
+The arguments are:
+* `rounds`: we evaluate from data size 1 million to 7 million, youcan set this argument from 1 to 7 to adjust, default is 1,
+* `simple`: ince method like PI-single takes a really long time to evaluate (nearly 100,000 seconds on 7 million), the scripts default runs on **LTE**, **MDI-default**, **MDI-tuned** and **SHAP-default**, which can be done in 1000 seconds on 1 million data size.
+
+The plot result will be saved into 
+* [`test/eval_result_files/clf_running time_result_fig4.pdf`](test/eval_result_files/clf_running time_result_fig4.pdf)
+* [`test/eval_result_files/reg_running time_result_fig4.pdf`](test/eval_result_files/reg_running time_result_fig4.pdf)
+* 

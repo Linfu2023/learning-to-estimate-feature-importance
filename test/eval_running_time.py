@@ -2,6 +2,7 @@ import os
 import argparse
 from sklearn.model_selection import train_test_split
 import time
+import gzip
 import json
 from eval_utils import *
 import sys
@@ -19,7 +20,29 @@ def process_cat(data, categorical_features):
     return data
 
 
+def load_data(eval_file_path):
+    def merge_gzip_files(output_file):
+        part_files = sorted(os.listdir(eval_file_path))
+        with gzip.open(output_file, 'wb') as f_out:
+            for part_file in part_files:
+                if part_file.startswith(csv_name + '_part'):
+                    part_path = os.path.join(eval_file_path, part_file)
+                    with gzip.open(part_path, 'rb') as f_in:
+                        f_out.write(f_in.read())
+
+    for csv_name in ["data_x", "data_y"]:
+        output_file = os.path.join(eval_file_path, "temp.gz")
+        merge_gzip_files(output_file)
+
+        with gzip.open(output_file, 'rb') as f_in:
+            with open(os.path.join(eval_file_path, f'{csv_name}.csv'), 'wb') as f_out:
+                for line in f_in:
+                    f_out.write(line)
+        os.remove(output_file)
+
+
 def multiple_data_to_million(data_path):
+    load_data(data_path)
     data_x = pd.read_csv(os.path.join(data_path, "data_x.csv"))
     data_y = pd.read_csv(os.path.join(data_path, "data_y.csv"))
 
@@ -32,16 +55,19 @@ def multiple_data_to_million(data_path):
 
 def run():
     file_path = os.path.join(directory, 'data/test_data/running_time_test')
-
+    if simple:
+        eval_list = ["lte", "mdi_default", "mdi_tuned", "shap_default"]
+    else:
+        eval_list = ["lte", "mdi_default", "mdi_tuned", "shap_default", "shap_tuned", "pi_single", "pi_ensemble"]
     for task in ["binary_classification", "regression"]:
         time_result = {
-            "lte": [],
-            "mdi_default": [],
-            "mdi_tuned": [],
-            "shap_default": [],
-            "shap_tuned": [],
-            "pi_single": [],
-            "pi_ensemble": [],
+            "lte": [1],
+            "mdi_default": [1],
+            "mdi_tuned": [1],
+            "shap_default": [1],
+            "shap_tuned": [1],
+            "pi_single": [1],
+            "pi_ensemble": [1],
         }
         model_path_map = {
             "binary_classification": os.path.join(directory, 'models/LTE_models_clf'),
@@ -55,7 +81,7 @@ def run():
         data_x_ori, data_y_ori = multiple_data_to_million(data_path)
         categorical_features = list(data_x_ori.select_dtypes(exclude=np.number).columns)
 
-        for running_round in [1, 2, 3, 4, 5, 6, 7]:
+        for running_round in range(1, rounds + 1):
             logger.log("Start running at Round %d..." % running_round)
             data_x = pd.concat([data_x_ori] * running_round).reset_index(drop=True)
             logger.log("Shape of dataset: %d" % data_x.shape[0])
@@ -63,7 +89,7 @@ def run():
             data_y = pd.concat([data_y_ori] * running_round).reset_index(drop=True)
             train_x, valid_x, train_y, valid_y = train_test_split(data_x, data_y, test_size=0.2, random_state=0)
 
-            for eval_type in ["lte", "mdi_default", "mdi_tuned", "shap_default", "shap_tuned", "pi_single", "pi_ensemble"]:
+            for eval_type in eval_list:
                 logger.log("eval_type--%s" % eval_type)
 
                 now = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
@@ -98,17 +124,20 @@ def run():
     reg_res_data_path = os.path.join(directory, "test/eval_result_files/reg_running_time_result_fig4.json")
     assert os.path.exists(clf_res_data_path)
     assert os.path.exists(reg_res_data_path)
-    plot_fig4(clf_res_data_path, os.path.join(directory, "test/eval_result_files/clf_running_time_result_fig4.pdf"))
-    plot_fig4(reg_res_data_path, os.path.join(directory, "test/eval_result_files/reg_running_time_result_fig4.pdf"))
+    plot_fig4(clf_res_data_path, os.path.join(directory, "test/eval_result_files/clf_running_time_result_fig4.pdf"), simple)
+    plot_fig4(reg_res_data_path, os.path.join(directory, "test/eval_result_files/reg_running_time_result_fig4.pdf"), simple)
 
 
 if __name__ == "__main__":
     logger = Logger("time_eval_LTE")
     parser = argparse.ArgumentParser()
     parser.add_argument("-d", "--directory", help="directory of FeatureLTE", type=str, default="FeatureLTE")
-
+    parser.add_argument("-r", "--rounds", help="data multiple rounds", type=int, default="1")
+    parser.add_argument("-s", "--simple", help="run the fast test without PI & SHAP-tuned", action="store_true")
     parser.add_argument("-n", "--n_jobs", help="evaluation type", type=int, default="-1")
     args = parser.parse_args()
+    rounds = args.rounds
+    simple = args.simple
     directory = args.directory
     n_jobs = args.n_jobs
     run()

@@ -1,1 +1,1 @@
-python ../test/eval_running_time.py --directory ../ --n_jobs 8
+python ../test/eval_running_time.py --rounds 1 --simple --directory ../ --n_jobs 8

@@ -12,7 +12,7 @@ from predict.predict import get_LTE_result
 from eval_utils import *
 from eval_on_test_data import evaluation
 from data_utils import merge_eval_results
-from plot_utils import plot_fig2, plot_fig3
+from plot_utils import plot_fig2
 
 
 def get_test_data_list():
@@ -164,16 +164,14 @@ def run():
     merge_eval_results(test_data_list, directory)
     clf_fig2_data_path = os.path.join(directory, "test/eval_result_files/clf_eval_result_fig2.txt")
     reg_fig2_data_path = os.path.join(directory, "test/eval_result_files/reg_eval_result_fig2.txt")
-    clf_fig3_data_path = os.path.join(directory, "test/eval_result_files/clf_eval_result_fig3.csv")
-    reg_fig3_data_path = os.path.join(directory, "test/eval_result_files/reg_eval_result_fig3.csv")
+    clf_fig2_detail_data_path = os.path.join(directory, "test/eval_result_files/clf_eval_result_fig2.csv")
+    reg_fig2_detail_data_path = os.path.join(directory, "test/eval_result_files/reg_eval_result_fig2.csv")
     assert os.path.exists(clf_fig2_data_path)
     assert os.path.exists(reg_fig2_data_path)
-    assert os.path.exists(clf_fig3_data_path)
-    assert os.path.exists(reg_fig3_data_path)
+    assert os.path.exists(clf_fig2_detail_data_path)
+    assert os.path.exists(reg_fig2_detail_data_path)
     plot_fig2(clf_fig2_data_path, os.path.join(directory, "test/eval_result_files/clf_eval_result_fig2.pdf"))
     plot_fig2(reg_fig2_data_path, os.path.join(directory, "test/eval_result_files/reg_eval_result_fig2.pdf"))
-    plot_fig3(clf_fig3_data_path, os.path.join(directory, "test/eval_result_files/clf_eval_result_fig3.pdf"))
-    plot_fig3(reg_fig3_data_path, os.path.join(directory, "test/eval_result_files/reg_eval_result_fig3.pdf"))
 
 
 if __name__ == "__main__":
