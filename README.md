@@ -195,19 +195,60 @@ It will evaluate on all the test datasets with different evaluation method, the 
 * [`test/eval_result_files/clf_eval_result_fig2.pdf`](test/eval_result_files/clf_eval_result_fig2.pdf)
 * [`test/eval_result_files/reg_eval_result_fig2.pdf`](test/eval_result_files/reg_eval_result_fig2.pdf)
 
+**It is noteworthy that our previous experiments were conducted within the company's large-scale distributed system, whereas this script runs in a serial manner, which will take a considerable amount of time to complete.**
+
 Those plots are consistent with those presented in Figure 2 of our paper.
 
 ## Evaluate the Running time
-We discussed the efficiency of FIS estimation for LTE models in our paper, and the running time of different methods are showed in Figure 4. You can reproduce the result by directly executing the scripts below:
+We discussed the efficiency of FIS estimation for LTE models in our paper, and the running time of different methods are showed in Figure 4. You can run a quick evaluation demo by directly executing the scripts below:
 ```bash
 $ cd FeatureLTE/scripts
 $ sh run_eval_running_time.sh
 ```
+The test datasets are:
+* binary classification: [`data/test_data/running_time_test/[UCI]Covertype`](data/test_data/running_time_test/[UCI]Covertype)
+* regression: [`data/test_data/running_time_test/uber_and_lyft`](data/test_data/running_time_test/uber_and_lyft)  
+
+It will evaluate on both of them, you can modify the argument in [`scripts/run_eval_running_time.sh`](scripts/run_eval_running_time.sh) to control the datasize and specify methods:
+
 The arguments are:
-* `rounds`: we evaluate from data size 1 million to 7 million, youcan set this argument from 1 to 7 to adjust, default is 1,
-* `simple`: ince method like PI-single takes a really long time to evaluate (nearly 100,000 seconds on 7 million), the scripts default runs on **LTE**, **MDI-default**, **MDI-tuned** and **SHAP-default**, which can be done in 1000 seconds on 1 million data size.
+* `rounds`: we evaluate from datasize: 1 million to 7 million, you can set this argument from 1 to 7 to adjust, default is 1
+* `simple`: since method like PI-ensemble takes a really long time to evaluate (over 100,000 seconds on 1 million scale), the scripts default runs on **LTE**, **MDI-default**, **MDI-tuned** and **SHAP-default**, which can be done in 1000 seconds on 1 million data size.
+
+and the specific numbers will be saved into 
+* `test/eval_result_files/clf_running time_result.json`
+* `test/eval_result_files/reg_running time_result.json`
+
 
 The plot result will be saved into 
-* [`test/eval_result_files/clf_running time_result_fig4.pdf`](test/eval_result_files/clf_running time_result_fig4.pdf)
-* [`test/eval_result_files/reg_running time_result_fig4.pdf`](test/eval_result_files/reg_running time_result_fig4.pdf)
-* 
+* `test/eval_result_files/clf_running time_result.pdf`
+* `test/eval_result_files/reg_running time_result.pdf`
+
+
+Here is one of the running time evaluation results that will be saved by executing the scripts above with default arguments:  
+`clf_running time_result.json`
+
+**It's worth noting that our results were obtained on a MacBook with 8 cores and 16GB memory, and different devices may yield varying numerical results. However, the overall proportions should remain consistent.**
+
+
+```json
+{
+    "lte":
+    [1, 164.17056226730347],
+    "mdi_default":
+    [1, 5.932538032531738],
+    "mdi_tuned":
+    [1, 219.6426095962524],
+    "shap_default":
+    [1, 52.58369016647339],
+    "shap_tuned":
+    [1],
+    "pi_single":
+    [1],
+    "pi_ensemble":
+    [1]
+}
+```
+Running time of each method will be list in the file:  
+e.g., `"lte":[1, 164.17056226730347]` means under method LTE, the running time consumed is 164 seconds with 1 million datasize, the first element of the list is always `1`, which is an initial value  merely to ensure that the starting point is 0 after log calculation when plotting.
+If you have modified the argument `rounds > 1`, then more values will be appended to the list.

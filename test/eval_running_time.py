@@ -117,15 +117,15 @@ def run():
             prefix = "clf"
         elif task == "regression":
             prefix = "reg"
-        with open(os.path.join(directory, "test/eval_result_files/%s_running_time_result_fig4.json" % prefix), "w") as f:
+        with open(os.path.join(directory, "test/eval_result_files/%s_running_time_result.json" % prefix), "w") as f:
             json.dump(time_result, f)
 
-    clf_res_data_path = os.path.join(directory, "test/eval_result_files/clf_running_time_result_fig4.json")
-    reg_res_data_path = os.path.join(directory, "test/eval_result_files/reg_running_time_result_fig4.json")
+    clf_res_data_path = os.path.join(directory, "test/eval_result_files/clf_running_time_result.json")
+    reg_res_data_path = os.path.join(directory, "test/eval_result_files/reg_running_time_result.json")
     assert os.path.exists(clf_res_data_path)
     assert os.path.exists(reg_res_data_path)
-    plot_fig4(clf_res_data_path, os.path.join(directory, "test/eval_result_files/clf_running_time_result_fig4.pdf"), simple)
-    plot_fig4(reg_res_data_path, os.path.join(directory, "test/eval_result_files/reg_running_time_result_fig4.pdf"), simple)
+    plot_fig4(clf_res_data_path, os.path.join(directory, "test/eval_result_files/clf_running_time_result.pdf"), simple)
+    plot_fig4(reg_res_data_path, os.path.join(directory, "test/eval_result_files/reg_running_time_result.pdf"), simple)
 
 
 if __name__ == "__main__":
