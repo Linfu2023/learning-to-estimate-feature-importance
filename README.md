@@ -207,7 +207,7 @@ $ sh run_eval_running_time.sh
 ```
 The test datasets are:
 * binary classification: [`data/test_data/running_time_test/[UCI]Covertype`](data/test_data/running_time_test/[UCI]Covertype)
-* regression: [`data/test_data/running_time_test/uber_and_lyft`](data/test_data/running_time_test/uber_and_lyft)  
+* regression: [`data/test_data/running_time_test/[kaggle]uber_and_lyft`](data/test_data/running_time_test/[kaggle]uber_and_lyft)  
 
 It will evaluate on both of them, you can modify the argument in [`scripts/run_eval_running_time.sh`](scripts/run_eval_running_time.sh) to control the datasize and specify methods:
 

@@ -45,12 +45,18 @@ def multiple_data_to_million(data_path):
     load_data(data_path)
     data_x = pd.read_csv(os.path.join(data_path, "data_x.csv"))
     data_y = pd.read_csv(os.path.join(data_path, "data_y.csv"))
+    categorical_features = list(data_x.select_dtypes(exclude=np.number).columns)
+    data_x = process_cat(data_x, categorical_features)
 
-    del_len = 1000000 - len(data_x)
-    data_x_out = pd.concat([data_x, data_x.iloc[:del_len]])
-    data_y_out = pd.concat([data_y, data_y.iloc[:del_len]])
+    train_x, valid_x, train_y, valid_y = train_test_split(data_x, data_y, test_size=0.2, random_state=0)
 
-    return data_x_out, data_y_out
+    repeats = -(-1000000 // len(data_y))
+    train_x_out = pd.concat([train_x] * repeats, ignore_index=True)
+    train_y_out = pd.concat([train_y] * repeats, ignore_index=True)
+    valid_x_out = pd.concat([valid_x] * repeats, ignore_index=True)
+    valid_y_out = pd.concat([valid_y] * repeats, ignore_index=True)
+
+    return train_x_out, train_y_out, valid_x_out, valid_y_out
 
 
 def run():
@@ -77,17 +83,17 @@ def run():
         if task == "binary_classification":
             data_path = os.path.join(file_path, '[UCI]Covertype')
         elif task == "regression":
-            data_path = os.path.join(file_path, 'uber_and_lyft')
-        data_x_ori, data_y_ori = multiple_data_to_million(data_path)
-        categorical_features = list(data_x_ori.select_dtypes(exclude=np.number).columns)
+            data_path = os.path.join(file_path, '[kaggle]uber_and_lyft')
+        train_x_ori, train_y_ori, valid_x_ori, valid_y_ori = multiple_data_to_million(data_path)
 
         for running_round in range(1, rounds + 1):
             logger.log("Start running at Round %d..." % running_round)
-            data_x = pd.concat([data_x_ori] * running_round).reset_index(drop=True)
-            logger.log("Shape of dataset: %d" % data_x.shape[0])
-            data_x = process_cat(data_x, categorical_features)
-            data_y = pd.concat([data_y_ori] * running_round).reset_index(drop=True)
-            train_x, valid_x, train_y, valid_y = train_test_split(data_x, data_y, test_size=0.2, random_state=0)
+            train_x = pd.concat([train_x_ori] * running_round).reset_index(drop=True)
+            train_y = pd.concat([train_y_ori] * running_round).reset_index(drop=True)
+            valid_x = pd.concat([valid_x_ori] * running_round).reset_index(drop=True)
+            valid_y = pd.concat([valid_y_ori] * running_round).reset_index(drop=True)
+            logger.log("Shape of training dataset: %d" % train_x.shape[0])
+
 
             for eval_type in eval_list:
                 logger.log("eval_type--%s" % eval_type)
