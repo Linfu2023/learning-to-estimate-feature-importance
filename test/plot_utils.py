@@ -15,8 +15,8 @@ def plot_fig2(data_path, output_path):
     fig.patch.set_alpha(0)
 
     ax = fig.add_subplot()
-    ax.patch.set_facecolor("#e4eef6")  # 设置 ax1 区域背景颜色
-    ax.patch.set_alpha(0.5)  # 设置 ax1 区域背景颜色透明度
+    ax.patch.set_facecolor("#e4eef6")
+    ax.patch.set_alpha(0.5)
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
     ax.spines['bottom'].set_visible(False)
@@ -44,11 +44,11 @@ def plot_fig2(data_path, output_path):
                     plt.text(index_plot[text_index], y - std[x] - 0.0008, '%s' % round(y, 4), ha='center', va='bottom', size=6, zorder=20)
 
     index_x = [1.025, 4.025, 7.025, 10.025]
-    plt.xticks(index_x, ['5%', '10%', '15%', '20%'], fontsize=12)  # 设置横坐标刻度
-    plt.yticks([0, 0.005, 0.01, 0.015], ['0', '0.005', '0.010', '0.015'], fontsize=12)  # 设置横坐标刻度
-    plt.legend(shadow=True, loc='best', handlelength=1.5, fontsize=10)  # 设置 图例
-    plt.xlabel("k%", fontsize=14, style='italic')  # 设置横坐标轴名称
-    plt.ylabel(chr(916) + " AUC", fontsize=14)  # 设置纵坐标轴名称
+    plt.xticks(index_x, ['5%', '10%', '15%', '20%'], fontsize=12)
+    plt.yticks([0, 0.005, 0.01, 0.015], ['0', '0.005', '0.010', '0.015'], fontsize=12)
+    plt.legend(shadow=True, loc='best', handlelength=1.5, fontsize=10)
+    plt.xlabel("k%", fontsize=14, style='italic')
+    plt.ylabel(chr(916) + " AUC", fontsize=14)
     plt.xlim(-0.5, 11.7)
     plt.ylim(-0.003, 0.02)
     plt.grid(axis='y', color='white', linestyle="--", zorder=0, alpha=0.9)
@@ -65,11 +65,8 @@ def plot_fig4(data_path, output_path, simple):
     with open(data_path, "r") as f:
         rt_data = json.load(f)
 
-    # 创建一个图形窗口
     fig = plt.figure(figsize=(8, 4))
     fig.patch.set_alpha(0)
-
-    # 添加标题和标签
     ax = fig.add_subplot()
 
     ax.spines['top'].set_visible(False)
@@ -103,8 +100,6 @@ def plot_fig4(data_path, output_path, simple):
     for text in legend.get_texts():
         text.set_weight('bold')
     ax.grid(linestyle="--", alpha=0.5)
+    plt.grid(linestyle="--", alpha=0.5)
 
-    # 添加网格
-    plt.grid(linestyle="--", alpha=0.5)  # 设置背景网格线为虚线
-    # 显示图形
     plt.savefig(output_path, format='pdf', dpi=600, bbox_inches='tight')
