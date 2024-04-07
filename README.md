@@ -34,6 +34,22 @@ The dataset provided in the list above is in the format of [data_source]data_nam
 Since our model was trained using a **meta-learning** approach, we have placed the meta datasets used for training, validation and test in the repository. See the folder [`data/train_data`](data/train_data) & [`data/valid_data`](data/valid_data) & [`data/test_data`](data/test_data).  
 [**Training FeatureLTE Model from Scratch**](#Training FeatureLTE Model from Scratch)  will introduce how to reproduce the LTE models with the meta datasets.
 
+### Prepare training datasets from public
+You can download all the public datasets that we used by executing the scripts below, The datasets will be saved at [`data/public_datasets`](data/public_datasets):
+```bash
+$ cd FeatureLTE/data/public_datasets
+$ sh download_public_datasets.sh
+```
+
+Then you can make your own training data for LTE by generating training set with 5 different version of label:
+```bash
+$ cd FeatureLTE/scripts
+$ sh run_prepare_training_datasets.sh
+```
+the training data will saved as `meta_features_LTE_v%d.csv` at the certain file folder. You can freely combine these files into training and validation sets by merging them together, or by following the split listed in [`data/public_datasets_list`](data/public_datasets_list). 
+Then you can overwrite folders [`data/train_data`](data/train_data) & [`data/valid_data`](data/valid_data) & [`data/test_data`](data/test_data).  
+
+
 ## Installing Dependencies
 
 We build the FeatureLTE project under `python=3.6.5`, prepare the python environment of FeatureLTE by executing the scripts below:
