@@ -17,11 +17,11 @@ The specific model name e.g. `LTE_s1_v3` stands for:
 * set random_seed=3 when generate meta datasets for training 
 * set random_seed=1 when training LTE models
 
-## Public datasets
+## Public Datasets Partition
 We build our pre-trained models for binary classification and regression problems using observations from nearly **1,000 public datasets**.
 Dur to the space limitations of the repository, we only provide the test datasets, see [`data/test_data`](data/test_data).
 
-We list all the datasets used for FeatureLTE at [`data/public_datasets_list`](data/public_datasets_list).  They can be found at public websites directly. 
+We list all the datasets used for FeatureLTE at [`data/public_datasets_list`](data/public_datasets_list).  They can be found at public websites directly. Here is the partition of public datasets.
 * [`train_datasets_clf.txt`](data/public_datasets_list/train_datasets_clf.txt): training datasets used in binary classification FeatureLTE  
 * [`train_datasets_reg.txt`](data/public_datasets_list/train_datasets_reg.txt): training datasets used in regression FeatureLTE
 * [`valid_datasets_clf.txt`](data/public_datasets_list/valid_datasets_clf.txt): validation datasets used in binary classification FeatureLTE
@@ -34,20 +34,7 @@ The dataset provided in the list above is in the format of [data_source]data_nam
 Since our model was trained using a **meta-learning** approach, we have placed the meta datasets used for training, validation and test in the repository. See the folder [`data/train_data`](data/train_data) & [`data/valid_data`](data/valid_data) & [`data/test_data`](data/test_data).  
 [**Training FeatureLTE Model from Scratch**](#Training FeatureLTE Model from Scratch)  will introduce how to reproduce the LTE models with the meta datasets.
 
-### Prepare training datasets from public
-You can download all the public datasets that we used by executing the scripts below, The datasets will be saved at [`data/public_datasets`](data/public_datasets):
-```bash
-$ cd FeatureLTE/data/public_datasets
-$ sh download_public_datasets.sh
-```
-
-Then you can make your own training data for LTE by generating training set with 5 different version of label:
-```bash
-$ cd FeatureLTE/scripts
-$ sh run_prepare_training_datasets.sh
-```
-the training data will saved as `meta_features_LTE_v%d.csv` at the certain file folder. You can freely combine these files into training and validation sets by merging them together, or by following the split listed in [`data/public_datasets_list`](data/public_datasets_list). 
-Then you can overwrite folders [`data/train_data`](data/train_data) & [`data/valid_data`](data/valid_data) & [`data/test_data`](data/test_data).  
+This is the partition that we used in our paper.
 
 
 ## Installing Dependencies
@@ -60,9 +47,26 @@ $ cd FeatureLTE
 $ pip install -r requirements.txt
 ```
 
+## (Optional) Downloading Public Datasets
+Note that this step is optional as we have provided pre-processed meta training and validation sets for LTE training. 
+
+If you want to download all public datasets and train LTE models from scratch, you can execute the following script. The datasets will be saved at [`data/public_datasets`](data/public_datasets):
+```bash
+$ cd FeatureLTE/data/public_datasets
+$ sh download_public_datasets.sh
+```
+
+Then you can make your own training data for LTE by generating training set with 5 different version of label:
+```bash
+$ cd FeatureLTE/scripts
+$ sh run_prepare_training_datasets.sh
+```
+the training data will saved as `meta_features_LTE_v%d.csv` at the certain file folder. You can freely combine these files into training and validation sets by merging them together, or follow the partition listed in [`data/public_datasets_list`](data/public_datasets_list). 
+Then you can overwrite folders [`data/train_data`](data/train_data) & [`data/valid_data`](data/valid_data) & [`data/test_data`](data/test_data).  
+
 ## Training FeatureLTE Model from Scratch
 
-You can also train an LTE model from scratch, simply run the code:
+You can also train an LTE model from scratch, simply run the following scripts:
 
 * binary classification task:
 
@@ -82,21 +86,21 @@ $ sh run_train_LTE_regression.sh
 ```
 The models will be saved into the path from argument `output_dir`, default is [`models/LTE_models_reg`](models/LTE_models_reg). 
 
-## Predict with LTE models
+## Predicting with LTE models
 
 You can run a quick prediction demo by executing the scripts below:
 ```bash
 $ cd FeatureLTE/scripts
 $ sh run_predict.sh
 ```
-This script can generate the *Feature Importance Score* by providing the arguments:
+This script generates the *Feature Importance Score* by providing the arguments:
 * `directory` root directory of FeatureLTE
 * `file_name` specify a certain dataset from folder [`data/test_data`](data/test_data), default is "[UCI]Arrhythmia"
 * `task` specify a binary classification task or a regression task, default is "binary_classification"
 * `model_dir` choose the models in folder [`models`](models), depends on a binary classification or regression task, default is "LTE_models_clf"
 
 
-Every test dataset has been split into 5 folds randomly: `<file_name>_eval_0` ~ `<file_name>_eval_4`, the scripts will proceed with
+Every test dataset has been partitioned into 5 folds randomly: `<file_name>_eval_0` ~ `<file_name>_eval_4`, the scripts will proceed with
 all these 5 datasets in parallel,
 It saves the feature importance scores into CSV file `lte_FI_result.csv`, at the directory of each dataset. 
 
@@ -123,7 +127,7 @@ e.g.,  `data/test_data/binary_classification/[UCI]Arrhythmia/[UCI]Arrhythmia_eva
 ## Evaluate an LTE Model
 
 After the LTE model was successfully trained and saved, we can evaluate the model by the output of the test dataset:
-First make sure you have performed the previous step [**Predict with LTE models**](#Predict with LTE models) and produced feature importance scores
+First make sure you have performed the previous step [**Predicting with LTE models**](#Predicting with LTE models) and produced feature importance scores
 into `lte_FI_result.csv`.
 
 Then you can run a quick evaluation demo by executing the scripts below:
@@ -201,7 +205,7 @@ Here is one of the LTE evaluation results that will be saved by executing the sc
   * **AUC Scores** from binary classification tasks
   * **MAPE Scores** from regression tasks
 
-## Reproduce the Evaluation Result
+## Reproducing the Evaluation Result
 We have evaluated our LTE models on the test dataset from folder [`data/test_data`](data/test_data), the evaluation result can be reproduced by directly executing the scripts below:
 ```bash
 $ cd FeatureLTE/scripts
@@ -215,7 +219,7 @@ It will evaluate on all the test datasets with different evaluation method, the 
 
 Those plots are consistent with those presented in Figure 2 of our paper.
 
-## Evaluate the Running time
+## Evaluating the Running time
 We discussed the efficiency of FIS estimation for LTE models in our paper, and the running time of different methods are showed in Figure 4. You can run a quick evaluation demo by directly executing the scripts below:
 ```bash
 $ cd FeatureLTE/scripts
