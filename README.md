@@ -32,7 +32,7 @@ We list all the datasets used for FeatureLTE at [`data/public_datasets_list`](da
 The dataset provided in the list above is in the format of [data_source]data_name, e.g., [openml]BNG(lymph,nominal,1000000) refers this dataset at https://www.openml.org/search?type=data&sort=runs&id=76&status=active
 
 Since our model was trained using a **meta-learning** approach, we have placed the meta datasets used for training, validation and test in the repository. See the folder [`data/train_data`](data/train_data) & [`data/valid_data`](data/valid_data) & [`data/test_data`](data/test_data).  
-[**Training FeatureLTE Model from Scratch**](#Training FeatureLTE Model from Scratch)  will introduce how to reproduce the LTE models with the meta datasets.
+[**Training FeatureLTE Model from Scratch**](#training-featurelte-model-from-scratch)  will introduce how to reproduce the LTE models with the meta datasets.
 
 This is the partition that we used in our paper.
 
@@ -127,7 +127,7 @@ e.g.,  `data/test_data/binary_classification/[UCI]Arrhythmia/[UCI]Arrhythmia_eva
 ## Evaluate an LTE Model
 
 After the LTE model was successfully trained and saved, we can evaluate the model by the output of the test dataset:
-First make sure you have performed the previous step [**Predicting with LTE models**](#Predicting with LTE models) and produced feature importance scores
+First make sure you have performed the previous step [**Predicting with LTE models**](#predicting-with-lte-models) and produced feature importance scores
 into `lte_FI_result.csv`.
 
 Then you can run a quick evaluation demo by executing the scripts below:
